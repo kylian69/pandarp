@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useSyncExternalStore } from "react";
 import { joinUrl } from "@/lib/site";
 
 type Props = {
@@ -10,8 +13,33 @@ type Props = {
 };
 
 /**
+ * FiveM n'existe sur aucune plateforme mobile — ce n'est pas une question
+ * d'installation, le jeu n'y tourne tout simplement pas. Un visiteur sur
+ * téléphone qui suit le lien cfx.re/join atterrit sur une page vide, sans
+ * aucun message : la page officielle ne gère pas ce cas non plus. On l'évite
+ * en le renvoyant vers la procédure plutôt que vers un lien mort.
+ */
+function isMobileDevice() {
+  const uaData = (navigator as Navigator & { userAgentData?: { mobile?: boolean } })
+    .userAgentData;
+  if (uaData) return uaData.mobile ?? false;
+  return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+// La détection ne change jamais en cours de session : un abonnement vide
+// suffit. useSyncExternalStore lit la valeur au montage sans passer par un
+// setState dans un effet, et rend explicitement la même chose au serveur
+// (aucun user-agent disponible) qu'avant l'hydratation côté client.
+const noopSubscribe = () => () => {};
+
+function useIsMobile() {
+  return useSyncExternalStore(noopSubscribe, isMobileDevice, () => false);
+}
+
+/**
  * Lance FiveM et connecte le joueur au serveur. Tant que le code cfx.re n'est
- * pas renseigné, le bouton renvoie vers la page qui explique la connexion
+ * pas renseigné, ou sur un appareil qui ne peut de toute façon pas lancer
+ * FiveM (mobile), le bouton renvoie vers la page qui explique la connexion
  * plutôt que vers un lien mort.
  */
 export default function JoinButton({
@@ -20,6 +48,10 @@ export default function JoinButton({
   className = "",
   children = "Rejoindre le serveur",
 }: Props) {
+  // Le rendu serveur suppose un poste compatible : c'est le cas le plus
+  // fréquent, et ça évite un flash de mauvais lien avant l'hydratation.
+  const mobile = useIsMobile();
+
   const base =
     "inline-flex items-center justify-center gap-2 font-semibold rounded-full transition-colors duration-150";
   const sizes = {
@@ -35,7 +67,7 @@ export default function JoinButton({
   };
   const classes = `${base} ${sizes[size]} ${variants[variant]} ${className}`;
 
-  if (!joinUrl) {
+  if (!joinUrl || mobile) {
     return (
       <Link href="/rejoindre" className={classes}>
         {children}

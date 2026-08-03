@@ -47,7 +47,15 @@ jamais envoyé sur GitHub.
       bouton utilise le lien `https://cfx.re/join/<code>`, mais aucune
       documentation officielle Cfx.re ne précise si ce lien sélectionne
       automatiquement la bonne build (Enhanced vs Legacy) quand un joueur a
-      les deux clients installés. Cliquez dessus vous-même une fois le
+      les deux clients installés.
+
+      Sur mobile, le bouton évite déjà ce lien : FiveM n'existe sur aucune
+      plateforme mobile, et la page `cfx.re/join` elle-même ne propose rien
+      en cas d'échec (pas de message, pas de lien de téléchargement) —
+      vérifié en la consultant directement. Un visiteur sur téléphone est
+      donc renvoyé vers `/rejoindre`, qui explique qu'un PC est nécessaire.
+
+      Cliquez sur le bouton vous-même une fois le
       serveur en ligne pour confirmer que ça ouvre bien la bonne version.
 
 - [ ] **`NEXT_PUBLIC_DISCORD_GUILD_ID`** — l'ID de votre serveur Discord.
