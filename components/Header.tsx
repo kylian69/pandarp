@@ -6,6 +6,7 @@ import { useState } from "react";
 import { nav, site } from "@/lib/site";
 import PandaMark from "./PandaMark";
 import JoinButton from "./JoinButton";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   const pathname = usePathname();
@@ -46,7 +47,8 @@ export default function Header() {
             </ul>
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3">
+            <ThemeToggle />
             <JoinButton size="sm" className="hidden sm:inline-flex">
               Rejoindre
             </JoinButton>

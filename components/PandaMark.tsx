@@ -19,9 +19,10 @@ export default function PandaMark({ className = "" }: { className?: string }) {
       focusable="false"
       className={className}
     >
-      {/* Oreilles */}
-      <circle cx="11.5" cy="12.5" r="7" fill={INK} />
-      <circle cx="36.5" cy="12.5" r="7" fill={INK} />
+      {/* Oreilles. Le liseré clair ne se voit que sur fond sombre, où le
+          remplissage seul se confondrait avec le fond. */}
+      <circle cx="11.5" cy="12.5" r="7" fill={INK} stroke={PAPER} strokeWidth="1.4" />
+      <circle cx="36.5" cy="12.5" r="7" fill={INK} stroke={PAPER} strokeWidth="1.4" />
       {/* Face */}
       <ellipse cx="24" cy="26.5" rx="17" ry="15.5" fill={PAPER} />
       {/* Taches oculaires, inclinées vers le museau */}

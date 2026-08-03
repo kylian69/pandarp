@@ -1,24 +1,67 @@
 @import "tailwindcss";
 
+/*
+  Les couleurs sont nommées par rôle, pas par teinte.
+
+    paper  le fond de la page — noir en thème sombre, blanc en thème clair
+    ink    son opposé, ce qui s'y inscrit — et le fond des « taches »
+    smoke  le texte secondaire
+    haze   les filets et séparateurs
+    seal   le rouge d'accent, sur le fond de page
+    bamboo le vert, réservé aux états « en ligne », toujours sur une tache
+
+  L'inversion tient à ces deux variables : en thème sombre, le papier devient
+  noir et l'encre claire, donc les taches passent de blocs sombres sur page
+  claire à des blocs clairs sur page sombre. La logique du panda est conservée,
+  simplement retournée.
+
+  Le thème sombre est celui par défaut : c'est `:root`. Le thème clair est une
+  surcharge explicite.
+*/
+
 @theme {
-  /* Palette : le panda est blanc, taché de noir. Le rouge de sceau est le seul
-     accent décoratif ; le jade est réservé aux états « en ligne ». */
-  --color-paper: #fafaf7;
-  --color-ink: #101012;
-  --color-seal: #d6362c;
-  --color-seal-deep: #a82820;
+  /* Thème sombre — celui par défaut. */
+  --color-paper: #0c0c0e;
+  --color-ink: #ecebe6;
+  --color-smoke: #8e8e96;
+  --color-haze: #232328;
+  --color-seal: #f0675c;
+  --color-seal-deep: #f5867b;
   --color-bamboo: #2f6b4f;
-  --color-smoke: #6b6b70;
-  --color-haze: #e4e3de;
+
+  /* Le rouge des boutons ne s'inverse pas : c'est un aplat qui doit rester
+     lisible sous du texte blanc dans les deux thèmes. */
+  --color-seal-fill: #d6362c;
+  --color-seal-fill-deep: #a82820;
+
+  --color-prose: #c9c8c3;
 
   --font-display: var(--font-anton), "Arial Narrow", sans-serif;
   --font-sans: var(--font-instrument), system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 }
 
+:root[data-theme="light"] {
+  --color-paper: #fafaf7;
+  --color-ink: #101012;
+  --color-smoke: #6b6b70;
+  --color-haze: #e4e3de;
+  --color-seal: #d6362c;
+  --color-seal-deep: #a82820;
+  /* Plus vif que sur fond clair : ce vert vit sur les taches, sombres ici. */
+  --color-bamboo: #4cb782;
+  --color-prose: #2a2a2e;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Accorde les contrôles natifs (barres de défilement, champs) au thème. */
+    color-scheme: dark;
+  }
+
+  html[data-theme="light"] {
+    color-scheme: light;
   }
 
   body {
@@ -29,8 +72,8 @@
   }
 
   ::selection {
-    background-color: var(--color-seal);
-    color: var(--color-paper);
+    background-color: var(--color-seal-fill);
+    color: #fafaf7;
   }
 
   :focus-visible {
@@ -53,8 +96,20 @@
 }
 
 @layer components {
-  /* Élément signature : les « taches ». Blocs d'encre aux angles organiques,
-     inégaux, qui rythment la page blanche comme les marques d'un panda. */
+  /* Icônes de la bascule de thème : c'est l'attribut data-theme qui décide
+     laquelle est visible, pas un état React — donc aucun clignotement. */
+  .theme-icon-sun,
+  .theme-icon-moon {
+    display: none;
+  }
+  :root[data-theme="dark"] .theme-icon-sun,
+  :root[data-theme="light"] .theme-icon-moon {
+    display: block;
+  }
+
+  /* Élément signature : les « taches ». Blocs aux angles organiques, inégaux,
+     qui rythment la page comme les marques d'un panda. Leur couleur s'inverse
+     avec le thème sans qu'aucune classe ne change. */
   .patch {
     background-color: var(--color-ink);
     color: var(--color-paper);
@@ -75,7 +130,7 @@
   }
 
   /* Titraille d'affiche : Anton demande un interlettrage resserré et une
-     interlignage très court pour tenir sa densité. */
+     interligne très courte pour tenir sa densité. */
   .display {
     font-family: var(--font-display);
     font-weight: 400;
@@ -116,7 +171,7 @@
   .prose-fr ol {
     margin-bottom: 1.125rem;
     line-height: 1.7;
-    color: #2a2a2e;
+    color: var(--color-prose);
   }
   .prose-fr ul,
   .prose-fr ol {
@@ -155,6 +210,7 @@
   }
   .prose-fr strong {
     font-weight: 600;
+    color: var(--color-ink);
   }
   .prose-fr blockquote {
     border-left: 3px solid var(--color-seal);

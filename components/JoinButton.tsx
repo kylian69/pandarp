@@ -27,7 +27,9 @@ export default function JoinButton({
     lg: "text-base px-7 py-3.5",
   };
   const variants = {
-    solid: "bg-seal text-paper hover:bg-seal-deep",
+    // L'aplat rouge et son texte blanc ne s'inversent pas avec le thème :
+    // le contraste doit rester identique dans les deux.
+    solid: "bg-seal-fill text-white hover:bg-seal-fill-deep",
     outline:
       "border border-paper/30 text-paper hover:bg-paper hover:text-ink",
   };

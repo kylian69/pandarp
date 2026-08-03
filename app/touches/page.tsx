@@ -56,7 +56,7 @@ export default function TouchesPage() {
                         scope="row"
                         className="w-[38%] py-3.5 pr-4 sm:w-[26%] md:w-[20%]"
                       >
-                        <kbd className="inline-block rounded-md border border-haze bg-white px-2.5 py-1 font-mono text-sm font-semibold text-ink shadow-[0_1px_0_var(--color-haze)]">
+                        <kbd className="inline-block rounded-md border border-haze bg-haze/50 px-2.5 py-1 font-mono text-sm font-semibold text-ink">
                           {bind.keys}
                         </kbd>
                       </th>

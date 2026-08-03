@@ -109,6 +109,40 @@ triées par nom de fichier. Le nom sert de légende : `centre-ville-de-nuit.jpg`
 devient « Centre ville de nuit ». Préfixez d'un nombre pour forcer l'ordre
 (`01-…`, `02-…`), il est retiré de la légende.
 
+### Changer les couleurs
+
+Tout tient dans deux blocs de variables en haut de `app/globals.css`. Les
+couleurs sont nommées **par rôle**, pas par teinte :
+
+| Jeton | Rôle |
+| --- | --- |
+| `paper` | le fond de la page — noir en sombre, blanc en clair |
+| `ink` | son opposé, ce qui s'y inscrit, et le fond des « taches » |
+| `smoke` | le texte secondaire |
+| `haze` | les filets et séparateurs |
+| `seal` | le rouge d'accent, sur le fond de page |
+| `seal-fill` | le rouge des boutons — ne s'inverse pas |
+| `bamboo` | le vert, réservé aux états « en ligne » |
+
+L'inversion du thème tient entièrement à `paper` et `ink`. En sombre, le
+papier devient noir et l'encre claire : les taches passent donc de blocs
+sombres sur page claire à des blocs clairs sur page sombre. La logique du
+panda est conservée, simplement retournée — et aucune classe n'a besoin de
+changer dans les composants.
+
+Quand la charte définitive arrivera, il n'y aura que ces deux blocs à
+remplacer.
+
+### Le thème
+
+Le **sombre est le thème par défaut**. Un bouton dans l'en-tête bascule vers
+le clair, et le choix est mémorisé dans le `localStorage`.
+
+Le thème vit dans l'attribut `data-theme` de `<html>`. Un script inline dans
+le `<head>` applique le choix mémorisé avant le premier rendu, ce qui évite
+tout clignotement. Les icônes du bouton sont montrées ou masquées en CSS selon
+cet attribut, sans état React — donc rien ne clignote non plus à l'hydratation.
+
 ### Remplacer le logo
 
 `components/PandaMark.tsx` contient une marque provisoire. Déposez le logo

@@ -89,8 +89,22 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
+      data-theme="dark"
+      suppressHydrationWarning
       className={`${anton.variable} ${instrument.variable} ${plexMono.variable} h-full`}
     >
+      <head>
+        {/*
+          Applique le thème mémorisé avant le premier rendu. Sans ce script,
+          un visiteur ayant choisi le clair verrait la page sombre clignoter
+          le temps que React s'hydrate.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem('pandarp-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}`,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-paper text-ink">
         <a
           href="#contenu"
