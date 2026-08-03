@@ -89,7 +89,52 @@ imminente » plutôt qu'un compteur vide.
 
 ---
 
-## 3. Les captures du serveur
+## 3. Les patch notes — à remplacer ⚠️
+
+La page `/patch-notes` est en place, mais les **trois notes de version
+actuellement en ligne sont des exemples que j'ai inventés** (versions 0.7.0 à
+0.9.0) pour donner à voir le rendu. Elles décrivent des fonctionnalités qui
+n'existent pas forcément sur votre serveur.
+
+- [ ] **Supprimer ou réécrire** les fichiers de `content/patch-notes/`
+
+**Comment en ajouter une :** créez un fichier `content/patch-notes/1.0.0.md`
+(le nom du fichier est libre, c'est le champ `version` qui compte) :
+
+```markdown
+---
+version: "1.0.0"
+date: "2026-09-15"
+title: "Ouverture officielle du serveur"
+tags: ["Ajout", "Correctif"]
+---
+
+Une phrase d'introduction qui résume le lot.
+
+### Ajouts
+
+- **Nom de la nouveauté** : ce qu'elle change pour le joueur.
+
+### Correctifs
+
+- Ce qui a été réparé.
+```
+
+Le reste est automatique : tri par numéro de version (du plus récent au plus
+ancien), affichage sur la page, raccourci vers la dernière version sur la page
+d'accueil, et mise à jour du plan du site pour les moteurs de recherche.
+
+Chaque version a une adresse directe, pratique pour la partager sur Discord :
+`https://pandarp.fr/patch-notes#v1-0-0` (les points deviennent des tirets).
+
+**Pour plus tard :** la publication automatique depuis Discord. Techniquement
+la brique manquante est un petit service qui écoute un salon Discord et écrit
+le fichier Markdown correspondant — on le fera quand le serveur tournera et
+que le format des annonces sera stabilisé.
+
+---
+
+## 4. Les captures du serveur
 
 - [ ] **6 à 12 captures d'écran** prises en jeu, en 1920 × 1080 minimum,
       en `.jpg` ou `.webp`
@@ -111,7 +156,7 @@ arrivent, avec un renvoi vers le Discord.
 
 ---
 
-## 4. Le domaine
+## 5. Le domaine
 
 - [ ] **Acheter `pandarp.fr`**
 
@@ -127,7 +172,7 @@ récompense l'ancienneté, et rien ne remplace le temps.
 
 ---
 
-## 5. Une image de partage
+## 6. Une image de partage
 
 - [ ] **Visuel 1200 × 630** — ce qui s'affiche quand un lien du site est
       collé sur Discord, Twitter ou WhatsApp
@@ -143,7 +188,7 @@ texte, sans vignette — ça marche, mais c'est nettement moins cliqué.
 
 ---
 
-## 6. Optionnel, quand vous les aurez
+## 7. Optionnel, quand vous les aurez
 
 - [ ] Chaîne YouTube ou Twitch officielle du serveur (à lier dans le pied de page)
 - [ ] Compte Twitter / X, TikTok

@@ -71,6 +71,7 @@ app/                pages et routes (une page = un dossier)
 components/         en-tête, pied de page, panneau live, primitives
 content/            tout le texte éditorial — c'est ici qu'on écrit
   blog/*.md         articles, en Markdown avec frontmatter
+  patch-notes/*.md  notes de version, une par mise à jour
 lib/                configuration du site, appels live, lecture du blog
 public/medias/      captures d'écran de la galerie
 ```
@@ -101,6 +102,25 @@ Le corps de l'article, en Markdown.
 
 Le fichier `mon-article.md` devient `/blog/mon-article`. Il apparaît
 automatiquement dans la liste, dans le plan du site et sur l'accueil.
+
+### Publier une note de version
+
+Créez un fichier dans `content/patch-notes/` :
+
+```markdown
+---
+version: "1.0.0"
+date: "2026-09-15"
+title: "Ouverture officielle du serveur"
+tags: ["Ajout", "Correctif"]
+---
+
+Une phrase d'introduction, puis les sections `### Ajouts`, `### Correctifs`…
+```
+
+Les notes sont triées par numéro de version, pas par nom de fichier : `0.10.0`
+passe bien avant `0.9.0`. Chacune obtient une ancre partageable
+(`/patch-notes#v1-0-0`), et la plus récente s'affiche sur l'accueil.
 
 ### Ajouter des captures à la galerie
 

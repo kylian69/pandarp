@@ -3,6 +3,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { getDiscordStatus, getServerStatus } from "@/lib/live";
 import { getAllPosts, formatDate } from "@/lib/blog";
+import { getPatchNotes } from "@/lib/patch-notes";
 import { features } from "@/content/features";
 import { site } from "@/lib/site";
 import LivePanel from "@/components/LivePanel";
@@ -23,6 +24,7 @@ export default async function HomePage() {
     getDiscordStatus(),
   ]);
   const posts = getAllPosts().slice(0, 3);
+  const [latestPatch] = await getPatchNotes();
 
   return (
     <>
@@ -226,6 +228,32 @@ export default async function HomePage() {
           </div>
         </Container>
       </section>
+
+      {/* Dernière mise à jour — une seule ligne : signaler que le serveur vit,
+          sans concurrencer les blocs de contenu qui l'entourent. */}
+      {latestPatch && (
+        <section className="pb-16 sm:pb-24">
+          <Container>
+            <Link
+              href={`/patch-notes#${latestPatch.anchor}`}
+              className="group flex flex-wrap items-baseline gap-x-4 gap-y-2 border-t border-ink pt-5"
+            >
+              <span className="eyebrow text-volt">
+                Mise à jour {latestPatch.version}
+              </span>
+              <span className="eyebrow text-smoke">
+                {formatDate(latestPatch.date)}
+              </span>
+              <span className="w-full font-semibold leading-snug transition-colors group-hover:text-volt sm:w-auto sm:flex-1">
+                {latestPatch.title}
+              </span>
+              <span className="text-sm text-smoke transition-colors group-hover:text-volt">
+                Tous les patch notes →
+              </span>
+            </Link>
+          </Container>
+        </section>
+      )}
 
       {/* Actualités */}
       {posts.length > 0 && (

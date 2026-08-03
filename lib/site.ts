@@ -44,6 +44,7 @@ export const nav = [
   { href: "/reglement", label: "Règlement" },
   { href: "/touches", label: "Touches" },
   { href: "/galerie", label: "Galerie" },
+  { href: "/patch-notes", label: "Patch notes" },
   { href: "/blog", label: "Actualités" },
   { href: "/faq", label: "FAQ" },
 ] as const;
