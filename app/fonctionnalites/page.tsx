@@ -62,7 +62,7 @@ export default function FonctionnalitesPage() {
           ))}
         </div>
 
-        <div className="patch patch-alt mt-20 px-7 py-12 sm:px-14 sm:py-16">
+        <div className="patch mt-20 px-7 py-12 sm:px-14 sm:py-16">
           <Eyebrow tone="muted">Prêt à essayer</Eyebrow>
           <h2 className="display mt-4 text-[clamp(1.75rem,5vw,3rem)] max-w-2xl">
             La meilleure façon de juger un serveur, c&apos;est d&apos;y entrer

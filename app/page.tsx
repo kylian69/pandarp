@@ -99,7 +99,7 @@ export default async function HomePage() {
       {/* Tache — le pari technique, sur fond d'encre. */}
       <section className="py-16 sm:py-24">
         <Container>
-          <div className="patch patch-alt px-7 py-12 sm:px-14 sm:py-16">
+          <div className="patch px-7 py-12 sm:px-14 sm:py-16">
             <Eyebrow tone="muted">Le pari</Eyebrow>
             <h2 className="display mt-4 text-[clamp(2rem,5.5vw,3.5rem)] max-w-3xl">
               Construit sur Enhanced, pas porté dessus

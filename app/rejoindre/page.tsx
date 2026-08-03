@@ -161,7 +161,7 @@ export default async function RejoindrePage() {
         </section>
 
         <section className="mt-20">
-          <div className="patch patch-alt px-7 py-12 sm:px-14 sm:py-16">
+          <div className="patch px-7 py-12 sm:px-14 sm:py-16">
             <Eyebrow tone="muted">Si ça coince</Eyebrow>
             <h2 className="display mt-4 text-[clamp(1.75rem,5vw,3rem)]">
               Les quatre blocages classiques

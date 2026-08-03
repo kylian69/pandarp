@@ -107,25 +107,20 @@
     display: block;
   }
 
-  /* Élément signature : les « taches ». Blocs aux angles organiques, inégaux,
-     qui rythment la page comme les marques d'un panda. Leur couleur s'inverse
-     avec le thème sans qu'aucune classe ne change. */
+  /* Élément signature : les « taches ». Blocs pleins qui rythment la page
+     comme les marques d'un panda. Leur couleur s'inverse avec le thème sans
+     qu'aucune classe ne change.
+     Le rayon est réduit sur mobile : à 2.5rem sur un bloc étroit, les coins
+     mangeraient le contenu. */
   .patch {
     background-color: var(--color-ink);
     color: var(--color-paper);
-    border-radius: 1.75rem 4rem 1.75rem 4rem;
-  }
-
-  .patch-alt {
-    border-radius: 4rem 1.75rem 4rem 1.75rem;
+    border-radius: 1.5rem;
   }
 
   @media (min-width: 768px) {
     .patch {
-      border-radius: 3rem 9rem 3rem 9rem;
-    }
-    .patch-alt {
-      border-radius: 9rem 3rem 9rem 3rem;
+      border-radius: 2.5rem;
     }
   }
 
