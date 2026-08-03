@@ -1,0 +1,3 @@
+Déposez ici les captures du serveur.
+Elles apparaissent automatiquement sur /galerie, triées par nom de fichier.
+Le nom sert de légende : centre-ville-de-nuit.jpg -> « Centre ville de nuit ».

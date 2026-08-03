@@ -1,26 +1,173 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Palette : le panda est blanc, taché de noir. Le rouge de sceau est le seul
+     accent décoratif ; le jade est réservé aux états « en ligne ». */
+  --color-paper: #fafaf7;
+  --color-ink: #101012;
+  --color-seal: #d6362c;
+  --color-seal-deep: #a82820;
+  --color-bamboo: #2f6b4f;
+  --color-smoke: #6b6b70;
+  --color-haze: #e4e3de;
+
+  --font-display: var(--font-anton), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-instrument), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-seal);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-seal);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Élément signature : les « taches ». Blocs d'encre aux angles organiques,
+     inégaux, qui rythment la page blanche comme les marques d'un panda. */
+  .patch {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+    border-radius: 1.75rem 4rem 1.75rem 4rem;
+  }
+
+  .patch-alt {
+    border-radius: 4rem 1.75rem 4rem 1.75rem;
+  }
+
+  @media (min-width: 768px) {
+    .patch {
+      border-radius: 3rem 9rem 3rem 9rem;
+    }
+    .patch-alt {
+      border-radius: 9rem 3rem 9rem 3rem;
+    }
+  }
+
+  /* Titraille d'affiche : Anton demande un interlettrage resserré et une
+     interlignage très court pour tenir sa densité. */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 0.88;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  /* Étiquette utilitaire : petites capitales monospace, langage d'instrument. */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .prose-fr {
+    max-width: 68ch;
+  }
+  .prose-fr h2 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+  .prose-fr h3 {
+    font-weight: 600;
+    font-size: 1.175rem;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  .prose-fr p,
+  .prose-fr ul,
+  .prose-fr ol {
+    margin-bottom: 1.125rem;
+    line-height: 1.7;
+    color: #2a2a2e;
+  }
+  .prose-fr ul,
+  .prose-fr ol {
+    padding-left: 1.25rem;
+  }
+  .prose-fr ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .prose-fr ul li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .prose-fr ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: var(--color-seal);
+    border-radius: 0.25rem 0.125rem 0.25rem 0.125rem;
+  }
+  .prose-fr ol {
+    list-style: decimal;
+  }
+  .prose-fr ol li {
+    margin-bottom: 0.5rem;
+    padding-left: 0.25rem;
+  }
+  .prose-fr a {
+    color: var(--color-seal-deep);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-fr strong {
+    font-weight: 600;
+  }
+  .prose-fr blockquote {
+    border-left: 3px solid var(--color-seal);
+    padding-left: 1.25rem;
+    font-style: italic;
+    color: var(--color-smoke);
+    margin-bottom: 1.125rem;
+  }
+  .prose-fr code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background-color: var(--color-haze);
+    padding: 0.15em 0.4em;
+    border-radius: 0.25rem;
+  }
 }
