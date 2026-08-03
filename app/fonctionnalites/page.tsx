@@ -35,7 +35,7 @@ export default function FonctionnalitesPage() {
               className="grid gap-6 lg:grid-cols-12 lg:gap-12"
             >
               <div className="lg:col-span-5">
-                <span className="font-mono text-sm font-semibold text-seal">
+                <span className="font-mono text-sm font-semibold text-volt">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <h2 className="display mt-3 text-[clamp(1.75rem,4.5vw,2.75rem)]">
@@ -51,7 +51,7 @@ export default function FonctionnalitesPage() {
                     <li key={detail} className="relative pl-6 text-[0.95rem] leading-relaxed text-smoke">
                       <span
                         aria-hidden="true"
-                        className="absolute left-0 top-[0.6em] h-2 w-2 rounded-[0.25rem_0.125rem_0.25rem_0.125rem] bg-seal"
+                        className="absolute left-0 top-[0.6em] h-2 w-2 rounded-[0.25rem_0.125rem_0.25rem_0.125rem] bg-volt"
                       />
                       {detail}
                     </li>

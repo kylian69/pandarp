@@ -69,7 +69,7 @@ export default async function PostPage({ params }: Props) {
       <Container className="pt-14 sm:pt-20">
         <Link
           href="/blog"
-          className="eyebrow text-smoke transition-colors hover:text-seal"
+          className="eyebrow text-smoke transition-colors hover:text-volt"
         >
           ← Tous les articles
         </Link>
@@ -116,7 +116,7 @@ export default async function PostPage({ params }: Props) {
                   <h3 className="mt-3 text-lg font-semibold leading-snug">
                     <Link
                       href={`/blog/${other.slug}`}
-                      className="transition-colors hover:text-seal"
+                      className="transition-colors hover:text-volt"
                     >
                       {other.title}
                     </Link>

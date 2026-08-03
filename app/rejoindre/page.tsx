@@ -147,7 +147,7 @@ export default async function RejoindrePage() {
             {steps.map((step, i) => (
               <li key={step.title} className="grid gap-4 lg:grid-cols-12 lg:gap-12">
                 <div className="lg:col-span-4">
-                  <span className="font-mono text-sm font-semibold text-seal">
+                  <span className="font-mono text-sm font-semibold text-volt">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h3 className="display mt-2 text-2xl">{step.title}</h3>

@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2.5">
-              <PandaMark className="h-8 w-8" />
+              <PandaMark className="h-8 w-8 text-volt" />
               <span className="display text-xl">{site.name}</span>
             </div>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-smoke">
@@ -25,7 +25,7 @@ export default function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-sm text-ink hover:text-seal transition-colors"
+                    className="text-sm text-ink hover:text-volt transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -43,7 +43,7 @@ export default function Footer() {
                     href={site.discordInvite}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-ink hover:text-seal transition-colors"
+                    className="text-sm text-ink hover:text-volt transition-colors"
                   >
                     Discord
                   </a>
@@ -54,7 +54,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/rejoindre"
-                  className="text-sm text-ink hover:text-seal transition-colors"
+                  className="text-sm text-ink hover:text-volt transition-colors"
                 >
                   Comment nous rejoindre
                 </Link>

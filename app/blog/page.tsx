@@ -47,7 +47,7 @@ export default function BlogPage() {
                     </p>
                   </div>
                   <div className="lg:col-span-9">
-                    <h2 className="display text-[clamp(1.5rem,3.5vw,2.25rem)] transition-colors group-hover:text-seal">
+                    <h2 className="display text-[clamp(1.5rem,3.5vw,2.25rem)] transition-colors group-hover:text-volt">
                       {post.title}
                     </h2>
                     <p className="mt-3 max-w-2xl leading-relaxed text-smoke">

@@ -7,7 +7,7 @@
     ink    son opposé, ce qui s'y inscrit — et le fond des « taches »
     smoke  le texte secondaire
     haze   les filets et séparateurs
-    seal   le rouge d'accent, sur le fond de page
+    volt   le bleu électrique d'accent, sur le fond de page — repris du logo
     bamboo le vert, réservé aux états « en ligne », toujours sur une tache
 
   L'inversion tient à ces deux variables : en thème sombre, le papier devient
@@ -25,18 +25,21 @@
   --color-ink: #ecebe6;
   --color-smoke: #8e8e96;
   --color-haze: #232328;
-  --color-seal: #f0675c;
-  --color-seal-deep: #f5867b;
+  /* Bleu mesuré sur le logo fourni (anneau peint), calibré plus clair pour
+     rester lisible sur un fond quasi noir. */
+  --color-volt: #4c9bec;
+  --color-volt-deep: #7ab5f2;
   --color-bamboo: #2f6b4f;
 
-  /* Le rouge des boutons ne s'inverse pas : c'est un aplat qui doit rester
-     lisible sous du texte blanc dans les deux thèmes. */
-  --color-seal-fill: #d6362c;
-  --color-seal-fill-deep: #a82820;
+  /* Le bleu des boutons ne s'inverse pas : c'est un aplat qui doit rester
+     lisible sous du texte blanc dans les deux thèmes. Plus soutenu que
+     `volt`, qui lui doit rester lisible en simple texte sur le fond. */
+  --color-volt-fill: #1c66c4;
+  --color-volt-fill-deep: #164f99;
 
   --color-prose: #c9c8c3;
 
-  --font-display: var(--font-anton), "Arial Narrow", sans-serif;
+  --font-display: var(--font-bungee), "Arial Narrow", sans-serif;
   --font-sans: var(--font-instrument), system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 }
@@ -46,8 +49,8 @@
   --color-ink: #101012;
   --color-smoke: #6b6b70;
   --color-haze: #e4e3de;
-  --color-seal: #d6362c;
-  --color-seal-deep: #a82820;
+  --color-volt: #1c66c4;
+  --color-volt-deep: #164f99;
   /* Plus vif que sur fond clair : ce vert vit sur les taches, sombres ici. */
   --color-bamboo: #4cb782;
   --color-prose: #2a2a2e;
@@ -72,12 +75,12 @@
   }
 
   ::selection {
-    background-color: var(--color-seal-fill);
+    background-color: var(--color-volt-fill);
     color: #fafaf7;
   }
 
   :focus-visible {
-    outline: 3px solid var(--color-seal);
+    outline: 3px solid var(--color-volt);
     outline-offset: 3px;
   }
 
@@ -124,13 +127,13 @@
     }
   }
 
-  /* Titraille d'affiche : Anton demande un interlettrage resserré et une
-     interligne très courte pour tenir sa densité. */
+  /* Titraille d'affiche : Bungee est large et pleine, à l'inverse d'une
+     condensée — un interlettrage resserré ferait se toucher les glyphes. */
   .display {
     font-family: var(--font-display);
     font-weight: 400;
-    line-height: 0.88;
-    letter-spacing: -0.015em;
+    line-height: 0.98;
+    letter-spacing: -0.01em;
     text-transform: uppercase;
   }
 
@@ -188,7 +191,7 @@
     top: 0.6em;
     width: 0.5rem;
     height: 0.5rem;
-    background-color: var(--color-seal);
+    background-color: var(--color-volt);
     border-radius: 0.25rem 0.125rem 0.25rem 0.125rem;
   }
   .prose-fr ol {
@@ -199,7 +202,7 @@
     padding-left: 0.25rem;
   }
   .prose-fr a {
-    color: var(--color-seal-deep);
+    color: var(--color-volt-deep);
     text-decoration: underline;
     text-underline-offset: 3px;
   }
@@ -208,7 +211,7 @@
     color: var(--color-ink);
   }
   .prose-fr blockquote {
-    border-left: 3px solid var(--color-seal);
+    border-left: 3px solid var(--color-volt);
     padding-left: 1.25rem;
     font-style: italic;
     color: var(--color-smoke);

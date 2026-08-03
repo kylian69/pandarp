@@ -29,7 +29,7 @@ export default function JoinButton({
   const variants = {
     // L'aplat rouge et son texte blanc ne s'inversent pas avec le thème :
     // le contraste doit rester identique dans les deux.
-    solid: "bg-seal-fill text-white hover:bg-seal-fill-deep",
+    solid: "bg-volt-fill text-white hover:bg-volt-fill-deep",
     outline:
       "border border-paper/30 text-paper hover:bg-paper hover:text-ink",
   };

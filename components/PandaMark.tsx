@@ -1,12 +1,12 @@
 /**
- * Marque provisoire, en attendant le logo fourni par le client.
+ * Marque provisoire, en attendant le fichier définitif du logo fourni par le
+ * client (`public/_tmp/logo-source.jpg`, à retravailler en vectoriel).
  * Pour la remplacer : déposer le fichier dans `public/logo.svg` et échanger ce
  * composant par un <Image src="/logo.svg" …/>.
  *
- * Les deux couleurs sont fixes plutôt qu'héritées : un panda est clair et
- * sombre quel que soit le fond. La face claire donne la silhouette sur
- * l'encre, les marques sombres portent le dessin sur le papier.
- * Pour l'atténuer, utiliser une classe d'opacité, pas une classe de couleur.
+ * Les couleurs de la face sont fixes plutôt qu'héritées : un panda est clair
+ * et sombre quel que soit le fond. Seul l'anneau reprend l'accent bleu du
+ * logo, via currentColor — c'est le seul élément qui doit suivre le thème.
  */
 const INK = "#101012";
 const PAPER = "#FAFAF7";
@@ -19,12 +19,20 @@ export default function PandaMark({ className = "" }: { className?: string }) {
       focusable="false"
       className={className}
     >
-      {/* Oreilles. Le liseré clair ne se voit que sur fond sombre, où le
-          remplissage seul se confondrait avec le fond. */}
-      <circle cx="11.5" cy="12.5" r="7" fill={INK} stroke={PAPER} strokeWidth="1.4" />
-      <circle cx="36.5" cy="12.5" r="7" fill={INK} stroke={PAPER} strokeWidth="1.4" />
+      {/* Anneau, écho du cercle peint au pinceau du logo fourni. */}
+      <circle
+        cx="24"
+        cy="24"
+        r="22.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.4"
+      />
+      {/* Oreilles */}
+      <circle cx="11.5" cy="12.5" r="6.6" fill={INK} />
+      <circle cx="36.5" cy="12.5" r="6.6" fill={INK} />
       {/* Face */}
-      <ellipse cx="24" cy="26.5" rx="17" ry="15.5" fill={PAPER} />
+      <ellipse cx="24" cy="26.5" rx="16" ry="14.6" fill={PAPER} />
       {/* Taches oculaires, inclinées vers le museau */}
       <ellipse
         cx="16.6"

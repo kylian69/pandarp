@@ -20,14 +20,14 @@ export function Container({
  */
 export function Eyebrow({
   children,
-  tone = "seal",
+  tone = "volt",
   className = "",
 }: {
   children: ReactNode;
-  tone?: "seal" | "muted";
+  tone?: "volt" | "muted";
   className?: string;
 }) {
-  const color = tone === "seal" ? "text-seal" : "text-paper/45";
+  const color = tone === "volt" ? "text-volt" : "text-paper/45";
   return <p className={`eyebrow ${color} ${className}`}>{children}</p>;
 }
 

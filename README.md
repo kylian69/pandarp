@@ -120,9 +120,14 @@ couleurs sont nommées **par rôle**, pas par teinte :
 | `ink` | son opposé, ce qui s'y inscrit, et le fond des « taches » |
 | `smoke` | le texte secondaire |
 | `haze` | les filets et séparateurs |
-| `seal` | le rouge d'accent, sur le fond de page |
-| `seal-fill` | le rouge des boutons — ne s'inverse pas |
+| `volt` | le bleu d'accent, sur le fond de page — repris du logo |
+| `volt-fill` | le bleu des boutons — ne s'inverse pas |
 | `bamboo` | le vert, réservé aux états « en ligne » |
+
+Le bleu (`volt`, `#1c66c4`–`#4c9bec`) est mesuré directement sur le logo
+Discord du serveur (anneau peint au pinceau). C'est une estimation par
+extraction de pixels, pas une valeur officielle de charte — si un fichier de
+marque avec les couleurs exactes existe, il remplace cette estimation.
 
 L'inversion du thème tient entièrement à `paper` et `ink`. En sombre, le
 papier devient noir et l'encre claire : les taches passent donc de blocs

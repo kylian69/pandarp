@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Anton, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Bungee, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
 import { site, isProductionSite } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
 
-const anton = Anton({
-  variable: "--font-anton",
+/** Titraille reprise du wordmark du logo : display urbain, épais et rond. */
+const bungee = Bungee({
+  variable: "--font-bungee",
   subsets: ["latin"],
   weight: "400",
   display: "swap",
@@ -91,7 +92,7 @@ export default function RootLayout({
       lang="fr"
       data-theme="dark"
       suppressHydrationWarning
-      className={`${anton.variable} ${instrument.variable} ${plexMono.variable} h-full`}
+      className={`${bungee.variable} ${instrument.variable} ${plexMono.variable} h-full`}
     >
       <head>
         {/*

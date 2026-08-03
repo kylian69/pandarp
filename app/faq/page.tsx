@@ -51,12 +51,12 @@ export default function FaqPage() {
               className="group border-b border-haze [&_summary::-webkit-details-marker]:hidden"
             >
               <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-6">
-                <h2 className="text-lg font-semibold leading-snug transition-colors group-open:text-seal">
+                <h2 className="text-lg font-semibold leading-snug transition-colors group-open:text-volt">
                   {item.question}
                 </h2>
                 <span
                   aria-hidden="true"
-                  className="mt-1 shrink-0 text-2xl leading-none text-smoke transition-transform duration-200 group-open:rotate-45 group-open:text-seal"
+                  className="mt-1 shrink-0 text-2xl leading-none text-smoke transition-transform duration-200 group-open:rotate-45 group-open:text-volt"
                 >
                   +
                 </span>

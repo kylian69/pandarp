@@ -49,7 +49,7 @@ export default async function HomePage() {
 
           <h1 className="display mt-5 text-[clamp(2.75rem,8.5vw,6.25rem)] max-w-5xl">
             Le roleplay sur GTA V Enhanced.{" "}
-            <span className="block text-seal">Sans whitelist.</span>
+            <span className="block text-volt">Sans whitelist.</span>
           </h1>
 
           <div className="mt-12 grid gap-10 lg:grid-cols-12 lg:gap-14">
@@ -72,7 +72,7 @@ export default async function HomePage() {
                 Nécessite GTA V Enhanced sur PC et le client FiveM.{" "}
                 <Link
                   href="/rejoindre"
-                  className="text-seal-deep underline underline-offset-2"
+                  className="text-volt-deep underline underline-offset-2"
                 >
                   Voir la procédure
                 </Link>
@@ -85,7 +85,7 @@ export default async function HomePage() {
               <div className="patch p-7 sm:p-8">
                 <div className="flex items-center justify-between">
                   <p className="eyebrow text-paper/45">En direct</p>
-                  <PandaMark className="h-7 w-7 opacity-30" />
+                  <PandaMark className="h-7 w-7 text-volt opacity-70" />
                 </div>
                 <div className="mt-5">
                   <LivePanel initialServer={server} initialDiscord={discord} />
@@ -163,7 +163,7 @@ export default async function HomePage() {
           <div className="mt-14">
             <Link
               href="/fonctionnalites"
-              className="inline-flex items-center gap-2 font-semibold text-seal-deep transition-all hover:gap-3"
+              className="inline-flex items-center gap-2 font-semibold text-volt-deep transition-all hover:gap-3"
             >
               Tout ce qui vous attend en jeu
               <span aria-hidden="true">→</span>
@@ -197,7 +197,7 @@ export default async function HomePage() {
                 },
               ].map((step, i) => (
                 <li key={step.t}>
-                  <span className="font-mono text-sm font-semibold text-seal">
+                  <span className="font-mono text-sm font-semibold text-volt">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h3 className="display mt-3 text-xl">{step.t}</h3>
@@ -211,7 +211,7 @@ export default async function HomePage() {
             <div className="mt-12">
               <Link
                 href="/rejoindre"
-                className="inline-flex items-center gap-2 font-semibold text-seal-deep transition-all hover:gap-3"
+                className="inline-flex items-center gap-2 font-semibold text-volt-deep transition-all hover:gap-3"
               >
                 Guide détaillé, avec les erreurs fréquentes
                 <span aria-hidden="true">→</span>
@@ -234,7 +234,7 @@ export default async function HomePage() {
               </div>
               <Link
                 href="/blog"
-                className="font-semibold text-seal-deep underline-offset-4 hover:underline"
+                className="font-semibold text-volt-deep underline-offset-4 hover:underline"
               >
                 Tous les articles
               </Link>
@@ -249,7 +249,7 @@ export default async function HomePage() {
                   <h3 className="mt-3 text-lg font-semibold leading-snug">
                     <Link
                       href={`/blog/${post.slug}`}
-                      className="transition-colors hover:text-seal"
+                      className="transition-colors hover:text-volt"
                     >
                       {post.title}
                     </Link>
@@ -268,7 +268,7 @@ export default async function HomePage() {
       <section className="pb-8">
         <Container>
           <div className="patch px-7 py-14 text-center sm:px-14 sm:py-20">
-            <PandaMark className="mx-auto h-14 w-14" />
+            <PandaMark className="mx-auto h-14 w-14 text-volt" />
             <h2 className="display mt-8 text-[clamp(2rem,6.5vw,4rem)]">
               Los Santos vous attend
             </h2>

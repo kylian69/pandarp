@@ -80,7 +80,7 @@ export default function GaleriePage() {
         ) : (
           /* État vide : il indique quoi faire, il ne s'excuse pas. */
           <div className="patch px-7 py-16 text-center sm:px-14 sm:py-24">
-            <PandaMark className="mx-auto h-14 w-14 opacity-75" />
+            <PandaMark className="mx-auto h-14 w-14 text-volt opacity-90" />
             <h2 className="display mt-8 text-[clamp(1.5rem,4.5vw,2.5rem)]">
               Les premières captures arrivent
             </h2>

@@ -10,18 +10,24 @@ Cochez au fur et à mesure et prévenez-moi, je m'occupe de l'intégration.
 
 ## 1. Le logo
 
-- [ ] **Logo PandaRP** — de préférence en SVG, sinon PNG avec fond transparent
-      (512 × 512 minimum)
-- [ ] Variante claire si le logo existe en deux versions (une pour fond blanc,
-      une pour fond noir)
-- [ ] Favicon, si vous en avez un dédié — sinon je le générerai depuis le logo
+Le fichier `pandarp_logo.jpg` que vous m'avez transmis (récupéré depuis
+l'icône du serveur Discord) m'a servi à recalibrer les couleurs du site — le
+bleu et le fond noir en sont directement extraits. Mais ce fichier fait
+160 × 160, en JPEG, fond noir plein : trop petit et non transparent pour
+servir de logo définitif à l'en-tête, au favicon ou aux partages sociaux.
 
-**Où le déposer :** `public/logo.svg`
+- [ ] **Le fichier source du logo**, en meilleure qualité — SVG si le
+      graphiste en a un, sinon un PNG haute résolution (512 × 512 minimum)
+      avec fond transparent
+- [ ] Favicon, si vous en avez un dédié — sinon je le génère depuis le logo
 
-**En attendant :** une marque provisoire dessinée à la main occupe la place
-(`components/PandaMark.tsx`). Elle apparaît dans l'en-tête, le pied de page,
-le panneau de statut, la galerie vide et la page 404. Un seul fichier à
-remplacer, tous les emplacements suivront.
+**Où le déposer :** `public/logo.svg` (ou `public/logo.png`)
+
+**En attendant :** une marque provisoire, dessinée à la main dans le même
+esprit (panda encré, anneau bleu), occupe la place (`components/PandaMark.tsx`).
+Elle apparaît dans l'en-tête, le pied de page, le panneau de statut, la
+galerie vide et la page 404. Un seul fichier à remplacer, tous les
+emplacements suivront.
 
 ---
 

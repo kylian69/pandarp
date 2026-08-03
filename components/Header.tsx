@@ -21,7 +21,7 @@ export default function Header() {
             className="flex items-center gap-2.5 shrink-0"
             onClick={() => setOpen(false)}
           >
-            <PandaMark className="h-8 w-8" />
+            <PandaMark className="h-8 w-8 text-volt" />
             <span className="display text-xl tracking-tight">{site.name}</span>
           </Link>
 
@@ -35,8 +35,8 @@ export default function Header() {
                     <Link
                       href={item.href}
                       aria-current={active ? "page" : undefined}
-                      className={`text-sm transition-colors hover:text-seal ${
-                        active ? "text-seal font-semibold" : "text-smoke"
+                      className={`text-sm transition-colors hover:text-volt ${
+                        active ? "text-volt font-semibold" : "text-smoke"
                       }`}
                     >
                       {item.label}

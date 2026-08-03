@@ -36,7 +36,7 @@ export default function ReglementPage() {
               <li key={section.slug}>
                 <a
                   href={`#${section.slug}`}
-                  className="eyebrow text-smoke transition-colors hover:text-seal"
+                  className="eyebrow text-smoke transition-colors hover:text-volt"
                 >
                   {section.title}
                 </a>
@@ -63,7 +63,7 @@ export default function ReglementPage() {
                     className="grid scroll-mt-24 gap-2 py-6 lg:grid-cols-12 lg:gap-8"
                   >
                     <dt className="lg:col-span-4">
-                      <span className="font-mono text-sm font-semibold text-seal">
+                      <span className="font-mono text-sm font-semibold text-volt">
                         {rule.code}
                       </span>
                       <span className="mt-1 block font-semibold">{rule.title}</span>
