@@ -18,6 +18,13 @@ export const site = {
   discordInvite: process.env.NEXT_PUBLIC_DISCORD_INVITE ?? "",
 } as const;
 
+/**
+ * Vrai uniquement sur le domaine de production. Les environnements de
+ * développement sont publics via le tunnel : sans ce garde-fou, Google les
+ * indexerait et ils feraient concurrence à pandarp.fr en contenu dupliqué.
+ */
+export const isProductionSite = site.url === "https://pandarp.fr";
+
 /** Lien de connexion direct qui lance FiveM sur le serveur. */
 export const joinUrl = site.cfxId ? `fivem://connect/${site.cfxId}` : "";
 

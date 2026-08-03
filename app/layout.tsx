@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Anton, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
-import { site } from "@/lib/site";
+import { site, isProductionSite } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
@@ -58,11 +58,15 @@ export const metadata: Metadata = {
     title: "PandaRP — Serveur GTA 5 RP sur FiveM Enhanced",
     description: site.description,
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true, "max-image-preview": "large" },
-  },
+  // `noindex` hors production : robots.txt seul n'empêche pas l'indexation
+  // d'une page atteinte par un lien externe, cette balise si.
+  robots: isProductionSite
+    ? {
+        index: true,
+        follow: true,
+        googleBot: { index: true, follow: true, "max-image-preview": "large" },
+      }
+    : { index: false, follow: false },
   category: "games",
 };
 

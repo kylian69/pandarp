@@ -18,6 +18,38 @@ Production :
 npm run build && npm run start
 ```
 
+## Environnement de développement
+
+Le site tourne en local et est exposé via un tunnel Cloudflare sur
+**https://pandarp.lumero.fr**.
+
+```bash
+# 1. le site, en build de production, sur le port 3100
+npm run build
+PORT=3100 npm run start
+
+# 2. le tunnel, dans un autre terminal
+cloudflared tunnel --no-autoupdate run --token "$(cat ~/.cloudflared/pandarp.token)"
+```
+
+Le jeton du tunnel vit dans `~/.cloudflared/pandarp.token`, hors du dépôt et en
+permissions `600`. Le tunnel s'appelle `pandarp` côté Cloudflare, sa
+configuration d'ingress est gérée à distance depuis le tableau de bord — rien
+à maintenir en local.
+
+Les deux processus sont détachés du terminal mais **ne survivent pas à un
+redémarrage de la machine**. Pour les rendre permanents, `cloudflared service
+install` et un service systemd pour le site feraient l'affaire.
+
+### Le site de développement n'est pas indexable
+
+Tant que `NEXT_PUBLIC_SITE_URL` ne vaut pas `https://pandarp.fr`, le site sert
+un `robots.txt` qui interdit tout et une balise `noindex, nofollow`. C'est
+délibéré : le tunnel est public, et laisser Google indexer le domaine de dev
+créerait un doublon qui ferait concurrence au vrai site. La bascule est
+automatique (`isProductionSite` dans `lib/site.ts`), il n'y a rien à penser à
+retirer le jour de la mise en production.
+
 ## Ce qu'il reste à renseigner
 
 Les quatre variables de `.env.local` pilotent le site. Sans elles, il
