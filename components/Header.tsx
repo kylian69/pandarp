@@ -56,9 +56,13 @@ export default function Header() {
 
           <div className="flex items-center gap-1.5 sm:gap-3">
             <ThemeToggle />
-            <JoinButton size="sm" className="hidden sm:inline-flex">
-              Rejoindre
-            </JoinButton>
+            {/* La visibilité se pilote sur ce conteneur, pas sur JoinButton :
+                son propre "inline-flex" interne écraserait un "hidden" posé
+                sur le même élément — les deux ciblent `display`, et c'est
+                l'ordre du CSS généré qui tranche, pas l'ordre des classes. */}
+            <div className="hidden sm:block">
+              <JoinButton size="sm">Rejoindre</JoinButton>
+            </div>
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
