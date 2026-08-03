@@ -25,8 +25,18 @@ export const site = {
  */
 export const isProductionSite = site.url === "https://pandarp.fr";
 
-/** Lien de connexion direct qui lance FiveM sur le serveur. */
-export const joinUrl = site.cfxId ? `fivem://connect/${site.cfxId}` : "";
+/**
+ * Lien de connexion direct qui lance FiveM sur le serveur.
+ *
+ * Format cfx.re/join/<code> plutôt que fivem://connect/<code> : c'est un lien
+ * https classique, qui s'ouvre même si aucun protocole personnalisé n'est
+ * enregistré sur la machine du joueur (fivem:// échoue silencieusement dans
+ * ce cas). La documentation Cfx.re ne précise nulle part comment un lien de
+ * connexion sélectionne la build Enhanced vs Legacy quand les deux sont
+ * installées — à vérifier en conditions réelles une fois un vrai code de
+ * serveur disponible.
+ */
+export const joinUrl = site.cfxId ? `https://cfx.re/join/${site.cfxId}` : "";
 
 export const nav = [
   { href: "/fonctionnalites", label: "Le serveur" },

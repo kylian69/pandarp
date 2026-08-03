@@ -43,6 +43,12 @@ jamais envoyé sur GitHub.
       visible sur le portail Cfx.re une fois le serveur enregistré.
       *Débloque :* le bouton « Rejoindre le serveur » qui lance FiveM
       directement, et le compteur de joueurs connectés en temps réel.
+      **⚠️ À tester en conditions réelles dès que ce code existe** : le
+      bouton utilise le lien `https://cfx.re/join/<code>`, mais aucune
+      documentation officielle Cfx.re ne précise si ce lien sélectionne
+      automatiquement la bonne build (Enhanced vs Legacy) quand un joueur a
+      les deux clients installés. Cliquez dessus vous-même une fois le
+      serveur en ligne pour confirmer que ça ouvre bien la bonne version.
 
 - [ ] **`NEXT_PUBLIC_DISCORD_GUILD_ID`** — l'ID de votre serveur Discord.
       Pour l'obtenir : activez le mode développeur dans Discord
