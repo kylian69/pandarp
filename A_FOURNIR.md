@@ -137,6 +137,7 @@ que le format des annonces sera stabilisé.
 ## 4. Les captures du serveur
 
 - [ ] **1 capture pour le fond de la page d'accueil**, en 1920 × 1080 minimum
+      — *une image provisoire est en place, à remplacer*
 - [ ] **6 à 12 captures d'écran** prises en jeu, en 1920 × 1080 minimum,
       en `.jpg` ou `.webp`
 
@@ -155,11 +156,24 @@ la moitié gauche — c'est là que se posent le titre et les boutons. Los Santo
 de nuit, une skyline, une route au crépuscule. Évitez les captures avec un
 personnage en gros plan au centre gauche : le titre lui passerait dessus.
 
-**Lisibilité :** un voile sombre est appliqué automatiquement par-dessus.
-J'ai vérifié à la mesure, sur une capture de nuit comme sur une capture de
-jour en plein soleil (le pire cas), que tous les textes du bandeau restent
-au-dessus des seuils de contraste WCAG AA. Vous pouvez donc déposer l'image
-sans craindre de rendre le titre illisible.
+**Lisibilité :** un assombrissement est appliqué automatiquement par-dessus.
+J'ai mesuré le contraste du pire pixel sous chaque ligne de texte, sur huit
+largeurs d'écran de 320 à 1920 px : tout passe les seuils WCAG AA. Vous pouvez
+donc déposer votre capture sans craindre de rendre le titre illisible.
+
+**⚠️ Image provisoire en place.** En attendant vos captures, j'ai mis une
+photo du centre-ville de Los Angeles de nuit — la ville dont Los Santos est la
+transposition dans GTA. Elle vient d'Unsplash (photographe Ryan De Hamer),
+sous licence libre y compris pour un usage commercial et sans attribution
+obligatoire.
+
+Je n'ai volontairement **pas** pris une capture officielle de GTA V trouvée
+sur internet : ces visuels appartiennent à Rockstar, et le pied de page du
+site affiche justement un avertissement de non-affiliation. Une photo sous
+licence libre remplit le même rôle sans cette contradiction.
+
+Remplacez-la dès que vous avez une vraie capture du serveur : c'est votre jeu
+qu'il faut montrer, pas une photo générique.
 
 ### Les captures de la galerie
 

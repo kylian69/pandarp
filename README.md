@@ -134,10 +134,20 @@ contient s'y accordent seuls, sans surcharge. Elle repose aussi `color`, sinon
 les éléments sans classe de couleur — le `h1` — hériteraient de la valeur déjà
 calculée sur `body`.
 
-Trois voiles se superposent à l'image : un uniforme qui garantit un plancher
-de contraste, un latéral qui protège la colonne de texte, un supérieur pour le
-surtitre. Ils sont calibrés pour tenir les seuils WCAG AA y compris sur une
-capture de plein jour.
+La lisibilité repose d'abord sur un filtre de luminosité appliqué à l'image :
+un voile s'ajoute uniformément alors que la gêne est ponctuelle — lampadaires,
+enseignes — là où la luminosité écrase ces pics proportionnellement, sans
+ternir les zones déjà sombres.
+
+Trois voiles la modulent ensuite : un plancher uniforme, un dégradé haut pour
+le surtitre, et un dégradé latéral qui assombrit la colonne de texte à partir
+de `lg`. En dessous, la mise en page s'empile et le texte occupe toute la
+largeur : le dégradé latéral n'y protégerait rien, le voile uniforme y est
+donc plus opaque.
+
+Le réglage a été calibré à la mesure, pas à l'œil : contraste du pire pixel
+sous chaque ligne de texte, sur huit largeurs de 320 à 1920 px. Si vous
+changez ces valeurs, revérifiez — le seuil se franchit sans que ça se voie.
 
 ### Ajouter des captures à la galerie
 

@@ -19,6 +19,25 @@ export const metadata: Metadata = {
 
 export const revalidate = 300;
 
+/**
+ * Voiles posés sur l'image du hero.
+ *
+ * Leur force suit l'emplacement du texte plutôt que d'être uniforme : un voile
+ * assez opaque partout pour garantir la lisibilité ternirait toute l'image, y
+ * compris là où rien n'est écrit. On assombrit donc franchement la colonne de
+ * texte et on laisse la droite presque intacte, là où le panneau de statut
+ * couvre déjà le fond.
+ *
+ * En dessous de `lg`, la mise en page s'empile et le texte occupe toute la
+ * largeur : un dégradé latéral n'y protégerait rien, un voile uniforme prend
+ * le relais.
+ */
+const SCRIMS = [
+  "bg-black/50 lg:bg-black/12",
+  "bg-gradient-to-b from-black/35 via-transparent to-transparent",
+  "hidden lg:block bg-gradient-to-r from-black/85 via-black/55 to-transparent",
+];
+
 export default async function HomePage() {
   const [server, discord] = await Promise.all([
     getServerStatus(),
@@ -64,17 +83,19 @@ export default async function HomePage() {
               // différé.
               priority
               sizes="100vw"
-              className="-z-10 object-cover"
+              // Le filtre fait l'essentiel du travail, les voiles ne font que
+              // le moduler. Un voile s'ajoute uniformément alors que la gêne
+              // est ponctuelle — les lampadaires, les enseignes ; la
+              // luminosité, elle, écrase ces pics proportionnellement, donc
+              // sans ternir les zones déjà sombres.
+              className="-z-10 object-cover brightness-[0.7]"
             />
-            {/* Deux voiles superposés : un uniforme qui garantit un plancher de
-                contraste partout, un dégradé qui assombrit davantage la gauche,
-                là où vivent le titre et le paragraphe. */}
-            <div className="absolute inset-0 -z-10 bg-black/55" />
-            <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
-            {/* Le surtitre est petit, bleu et tout en haut : c'est le texte le
-                plus fragile de la page. Ce dernier voile ne couvre que le haut,
-                pour le protéger sans ternir le reste de l'image. */}
-            <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
+            {/* Voir SCRIMS : plancher uniforme, protection du haut pour le
+                surtitre, et assombrissement de la colonne de texte sur grand
+                écran. */}
+            {SCRIMS.map((scrim) => (
+              <div key={scrim} className={`absolute inset-0 -z-10 ${scrim}`} />
+            ))}
           </>
         )}
         <Container className="pt-16 pb-16 sm:pt-24 sm:pb-20">
