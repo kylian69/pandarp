@@ -56,6 +56,29 @@
   --color-prose: #2a2a2e;
 }
 
+/* Zone posée sur une image sombre : ses couleurs ne suivent plus le thème.
+   Redéclarer les jetons du mode sombre sur le sous-arbre suffit — tous les
+   utilitaires qu'il contient (`text-ink`, `border-haze`, `text-volt-deep`…)
+   s'y accordent d'eux-mêmes, sans surcharge classe par classe.
+   Le gris est éclairci par rapport au mode sombre : sur une photo voilée, le
+   contraste d'un texte secondaire a besoin de cette marge. */
+.on-dark {
+  --color-paper: #0c0c0e;
+  --color-ink: #ecebe6;
+  --color-smoke: #b0b0b8;
+  --color-haze: #232328;
+  --color-volt: #4c9bec;
+  --color-volt-deep: #7ab5f2;
+  --color-bamboo: #2f6b4f;
+  --color-prose: #c9c8c3;
+
+  /* Indispensable : `body` fixe `color: var(--color-ink)`, donc la couleur y
+     est déjà résolue. Les éléments sans classe de couleur — le h1 — héritent
+     de cette valeur calculée, que redéclarer la variable ici ne rattrape pas.
+     Il faut reposer `color` pour que le sous-arbre hérite du bon ton. */
+  color: var(--color-ink);
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;

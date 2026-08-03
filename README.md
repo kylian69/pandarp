@@ -122,6 +122,23 @@ Les notes sont triées par numéro de version, pas par nom de fichier : `0.10.0`
 passe bien avant `0.9.0`. Chacune obtient une ancre partageable
 (`/patch-notes#v1-0-0`), et la plus récente s'affiche sur l'accueil.
 
+### Mettre une capture en fond de l'accueil
+
+Déposez l'image en `public/hero.jpg` (`.webp`, `.jpeg` et `.png` sont aussi
+reconnus, dans cet ordre de préférence). Le bandeau du haut devient une bande
+sombre avec l'image en fond ; sans fichier, il garde son apparence par défaut.
+
+La classe `.on-dark` rétablit alors la palette du mode sombre sur ce
+sous-arbre, quel que soit le thème actif : les utilitaires de couleur qu'il
+contient s'y accordent seuls, sans surcharge. Elle repose aussi `color`, sinon
+les éléments sans classe de couleur — le `h1` — hériteraient de la valeur déjà
+calculée sur `body`.
+
+Trois voiles se superposent à l'image : un uniforme qui garantit un plancher
+de contraste, un latéral qui protège la colonne de texte, un supérieur pour le
+surtitre. Ils sont calibrés pour tenir les seuils WCAG AA y compris sur une
+capture de plein jour.
+
 ### Ajouter des captures à la galerie
 
 Déposez vos images dans `public/medias/`. Elles sont publiées telles quelles,

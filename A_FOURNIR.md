@@ -136,8 +136,32 @@ que le format des annonces sera stabilisé.
 
 ## 4. Les captures du serveur
 
+- [ ] **1 capture pour le fond de la page d'accueil**, en 1920 × 1080 minimum
 - [ ] **6 à 12 captures d'écran** prises en jeu, en 1920 × 1080 minimum,
       en `.jpg` ou `.webp`
+
+### La capture de fond (hero)
+
+**Où la déposer :** `public/hero.jpg` (ou `.webp`, préférable : plus léger à
+qualité égale). Volontairement hors de `public/medias/`, sinon elle
+apparaîtrait aussi dans la galerie.
+
+Le bandeau du haut de l'accueil devient alors une bande sombre avec la capture
+en fond, dans les deux thèmes. Tant qu'aucun fichier n'est déposé, la page
+garde son apparence actuelle — rien ne casse.
+
+**Ce qui marche :** un plan large, plutôt sombre, sans élément important dans
+la moitié gauche — c'est là que se posent le titre et les boutons. Los Santos
+de nuit, une skyline, une route au crépuscule. Évitez les captures avec un
+personnage en gros plan au centre gauche : le titre lui passerait dessus.
+
+**Lisibilité :** un voile sombre est appliqué automatiquement par-dessus.
+J'ai vérifié à la mesure, sur une capture de nuit comme sur une capture de
+jour en plein soleil (le pire cas), que tous les textes du bandeau restent
+au-dessus des seuils de contraste WCAG AA. Vous pouvez donc déposer l'image
+sans craindre de rendre le titre illisible.
+
+### Les captures de la galerie
 
 Ce qui marche le mieux pour convaincre un joueur qui hésite : Los Santos de
 nuit sous la pluie (c'est là que le rendu Enhanced se voit le plus), une scène

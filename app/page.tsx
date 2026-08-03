@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { getDiscordStatus, getServerStatus } from "@/lib/live";
 import { getAllPosts, formatDate } from "@/lib/blog";
 import { getPatchNotes } from "@/lib/patch-notes";
+import { getHeroImage } from "@/lib/hero";
 import { features } from "@/content/features";
 import { site } from "@/lib/site";
 import LivePanel from "@/components/LivePanel";
@@ -25,6 +26,7 @@ export default async function HomePage() {
   ]);
   const posts = getAllPosts().slice(0, 3);
   const [latestPatch] = await getPatchNotes();
+  const heroImage = getHeroImage();
 
   return (
     <>
@@ -44,8 +46,37 @@ export default async function HomePage() {
         }}
       />
 
-      {/* Hero — la thèse du serveur, énoncée sans détour. */}
-      <section className="border-b border-haze">
+      {/* Hero — la thèse du serveur, énoncée sans détour.
+          Avec une capture en fond, le bloc devient une bande sombre dans les
+          deux thèmes : `on-dark` y rétablit la palette du mode sombre, ce qui
+          garde le texte lisible sans toucher aux classes de couleur. */}
+      <section
+        className={`border-b border-haze ${heroImage ? "relative isolate on-dark" : ""}`}
+      >
+        {heroImage && (
+          <>
+            <Image
+              src={heroImage}
+              alt=""
+              fill
+              // Plus gros téléchargement de la page et élément le plus grand
+              // au premier écran : il conditionne le LCP, donc pas de chargement
+              // différé.
+              priority
+              sizes="100vw"
+              className="-z-10 object-cover"
+            />
+            {/* Deux voiles superposés : un uniforme qui garantit un plancher de
+                contraste partout, un dégradé qui assombrit davantage la gauche,
+                là où vivent le titre et le paragraphe. */}
+            <div className="absolute inset-0 -z-10 bg-black/55" />
+            <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+            {/* Le surtitre est petit, bleu et tout en haut : c'est le texte le
+                plus fragile de la page. Ce dernier voile ne couvre que le haut,
+                pour le protéger sans ternir le reste de l'image. */}
+            <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
+          </>
+        )}
         <Container className="pt-16 pb-16 sm:pt-24 sm:pb-20">
           <Eyebrow>Serveur GTA 5 RP · FiveM Enhanced · Français</Eyebrow>
 
