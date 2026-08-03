@@ -39,8 +39,14 @@ Le vrai logo est intégré au site depuis les fichiers fournis. Détail dans
 dans `.env.example`, il suffit de le copier et de remplir. Ce fichier n'est
 jamais envoyé sur GitHub.
 
+**⚠️ Après avoir rempli ou changé une valeur ci-dessous, il faut reconstruire
+le site** (`npm run build` puis relancer `npm run start`) — un simple
+redémarrage ne suffit pas, ces variables sont figées dans le build par
+Next.js.
+
 - [ ] **`NEXT_PUBLIC_CFX_ID`** — le code de connexion cfx.re du serveur,
-      visible sur le portail Cfx.re une fois le serveur enregistré.
+      visible sur le portail Cfx.re une fois le serveur enregistré (créez le
+      serveur sur le portail Cfx.re / txAdmin pour l'obtenir).
       *Débloque :* le bouton « Rejoindre le serveur » qui lance FiveM
       directement, et le compteur de joueurs connectés en temps réel.
       **⚠️ À tester en conditions réelles dès que ce code existe** : le
