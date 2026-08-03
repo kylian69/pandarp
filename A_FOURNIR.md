@@ -8,26 +8,28 @@ Cochez au fur et à mesure et prévenez-moi, je m'occupe de l'intégration.
 
 ---
 
-## 1. Le logo
+## 1. Le logo — fait ✅
 
-Le fichier `pandarp_logo.jpg` que vous m'avez transmis (récupéré depuis
-l'icône du serveur Discord) m'a servi à recalibrer les couleurs du site — le
-bleu et le fond noir en sont directement extraits. Mais ce fichier fait
-160 × 160, en JPEG, fond noir plein : trop petit et non transparent pour
-servir de logo définitif à l'en-tête, au favicon ou aux partages sociaux.
+Le vrai logo est intégré au site depuis les fichiers fournis. Détail dans
+`public/brand/README.md`.
 
-- [ ] **Le fichier source du logo**, en meilleure qualité — SVG si le
-      graphiste en a un, sinon un PNG haute résolution (512 × 512 minimum)
-      avec fond transparent
-- [ ] Favicon, si vous en avez un dédié — sinon je le génère depuis le logo
+- [x] Icône seule (panda + anneau), en `public/brand/logo-icon.png`, utilisée
+      partout : en-tête, pied de page, favicon, panneau de statut, page 404,
+      galerie vide.
+- [x] Logo complet (icône + texte), en `public/brand/logo-full.png` — sert de
+      base à l'image de partage (`public/og.jpg`).
+- [x] Favicon et icône Apple générés (`app/icon.png`, `app/apple-icon.png`).
 
-**Où le déposer :** `public/logo.svg` (ou `public/logo.png`)
-
-**En attendant :** une marque provisoire, dessinée à la main dans le même
-esprit (panda encré, anneau bleu), occupe la place (`components/PandaMark.tsx`).
-Elle apparaît dans l'en-tête, le pied de page, le panneau de statut, la
-galerie vide et la page 404. Un seul fichier à remplacer, tous les
-emplacements suivront.
+**Reste en attente, si vous voulez pousser la qualité plus loin :**
+- [ ] Un vrai fichier vectoriel (les « SVG » livrés sont en réalité des PNG
+      encapsulés — voir `public/brand/README.md` pour le détail). Pas
+      bloquant : les PNG actuels (512–1024 px) suffisent largement aux tailles
+      utilisées sur le site.
+- [ ] Une version transparente correcte du **logo complet avec texte** — celle
+      fournie a un défaut (le texte blanc a été en partie effacé par le
+      détourage automatique). Non utilisée sur le site tant que ce n'est pas
+      corrigé ; l'image de partage utilise à la place l'original à fond sombre,
+      qui n'a pas ce défaut.
 
 ---
 

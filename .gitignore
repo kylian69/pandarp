@@ -40,3 +40,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Livrables bruts de logo (archive locale, non versionnée — voir public/brand/README.md)
+public/brand/source/

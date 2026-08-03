@@ -53,11 +53,13 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: "PandaRP — Serveur GTA 5 RP sur FiveM Enhanced, sans whitelist",
     description: site.description,
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: site.name }],
   },
   twitter: {
     card: "summary_large_image",
     title: "PandaRP — Serveur GTA 5 RP sur FiveM Enhanced",
     description: site.description,
+    images: ["/og.jpg"],
   },
   // `noindex` hors production : robots.txt seul n'empêche pas l'indexation
   // d'une page atteinte par un lien externe, cette balise si.

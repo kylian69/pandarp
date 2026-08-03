@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { nav, site } from "@/lib/site";
-import PandaMark from "./PandaMark";
 import JoinButton from "./JoinButton";
 import ThemeToggle from "./ThemeToggle";
 
@@ -21,7 +21,14 @@ export default function Header() {
             className="flex items-center gap-2.5 shrink-0"
             onClick={() => setOpen(false)}
           >
-            <PandaMark className="h-8 w-8 text-volt" />
+            <Image
+              src="/brand/logo-icon.png"
+              alt=""
+              width={32}
+              height={32}
+              className="h-8 w-8"
+              priority
+            />
             <span className="display text-xl tracking-tight">{site.name}</span>
           </Link>
 

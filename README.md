@@ -148,11 +148,22 @@ le `<head>` applique le choix mémorisé avant le premier rendu, ce qui évite
 tout clignotement. Les icônes du bouton sont montrées ou masquées en CSS selon
 cet attribut, sans état React — donc rien ne clignote non plus à l'hydratation.
 
-### Remplacer le logo
+### Le logo
 
-`components/PandaMark.tsx` contient une marque provisoire. Déposez le logo
-définitif dans `public/logo.svg` et remplacez le contenu du composant par un
-`<Image src="/logo.svg" … />` : tous les emplacements suivront.
+Le vrai logo est en place, dans `public/brand/` :
+
+- `logo-icon.png` — panda + anneau, sans texte. Utilisé partout sur le site
+  (en-tête, pied de page, favicon, panneau de statut, page 404, galerie vide).
+- `logo-full.png` — icône + texte « PANDARP ». A un défaut de détourage sur
+  le texte (voir `public/brand/README.md`), pas utilisé directement sur les
+  pages. L'image de partage (`public/og.jpg`) est construite depuis
+  l'original à fond sombre, qui n'a pas ce défaut.
+
+Pour mettre à jour l'icône (nouvelle version, correction) : remplacer
+`public/brand/logo-icon.png` (transparent, carré) suffit — tous les
+emplacements du site la référencent directement en `next/image`, aucun code
+à toucher. Penser aussi à régénérer `app/icon.png` et `app/apple-icon.png`
+à partir du nouveau fichier.
 
 ## Référencement
 

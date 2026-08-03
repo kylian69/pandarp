@@ -1,13 +1,19 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/ui";
-import PandaMark from "@/components/PandaMark";
 import JoinButton from "@/components/JoinButton";
 
 export default function NotFound() {
   return (
     <Container className="py-24 sm:py-32">
       <div className="patch px-7 py-16 text-center sm:px-14 sm:py-24">
-        <PandaMark className="mx-auto h-14 w-14 text-volt opacity-90" />
+        <Image
+          src="/brand/logo-icon.png"
+          alt="PandaRP"
+          width={56}
+          height={56}
+          className="mx-auto h-14 w-14 opacity-90"
+        />
         <p className="eyebrow mt-8 text-paper/45">Erreur 404</p>
         <h1 className="display mt-4 text-[clamp(2rem,6vw,3.5rem)]">
           Cette page n&apos;existe pas

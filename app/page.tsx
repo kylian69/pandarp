@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { getDiscordStatus, getServerStatus } from "@/lib/live";
 import { getAllPosts, formatDate } from "@/lib/blog";
@@ -6,7 +7,6 @@ import { features } from "@/content/features";
 import { site } from "@/lib/site";
 import LivePanel from "@/components/LivePanel";
 import JoinButton from "@/components/JoinButton";
-import PandaMark from "@/components/PandaMark";
 import { Container, Eyebrow, JsonLd } from "@/components/ui";
 
 export const metadata: Metadata = {
@@ -85,7 +85,13 @@ export default async function HomePage() {
               <div className="patch p-7 sm:p-8">
                 <div className="flex items-center justify-between">
                   <p className="eyebrow text-paper/45">En direct</p>
-                  <PandaMark className="h-7 w-7 text-volt opacity-70" />
+                  <Image
+                    src="/brand/logo-icon.png"
+                    alt=""
+                    width={28}
+                    height={28}
+                    className="h-7 w-7 opacity-70"
+                  />
                 </div>
                 <div className="mt-5">
                   <LivePanel initialServer={server} initialDiscord={discord} />
@@ -268,7 +274,13 @@ export default async function HomePage() {
       <section className="pb-8">
         <Container>
           <div className="patch px-7 py-14 text-center sm:px-14 sm:py-20">
-            <PandaMark className="mx-auto h-14 w-14 text-volt" />
+            <Image
+              src="/brand/logo-icon.png"
+              alt="PandaRP"
+              width={56}
+              height={56}
+              className="mx-auto h-14 w-14"
+            />
             <h2 className="display mt-8 text-[clamp(2rem,6.5vw,4rem)]">
               Los Santos vous attend
             </h2>

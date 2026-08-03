@@ -1,6 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
 import { nav, site } from "@/lib/site";
-import PandaMark from "./PandaMark";
 
 export default function Footer() {
   return (
@@ -9,7 +9,13 @@ export default function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2.5">
-              <PandaMark className="h-8 w-8 text-volt" />
+              <Image
+                src="/brand/logo-icon.png"
+                alt=""
+                width={32}
+                height={32}
+                className="h-8 w-8"
+              />
               <span className="display text-xl">{site.name}</span>
             </div>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-smoke">
