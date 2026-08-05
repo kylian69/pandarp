@@ -3,14 +3,85 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { nav, site } from "@/lib/site";
+import { useEffect, useRef, useState } from "react";
+import { isNavGroup, nav, site, type NavLink } from "@/lib/site";
 import JoinButton from "./JoinButton";
 import ThemeToggle from "./ThemeToggle";
 
+function Chevron({ open }: { open: boolean }) {
+  return (
+    <svg
+      width="10"
+      height="10"
+      viewBox="0 0 10 10"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className={`transition-transform ${open ? "-rotate-180" : ""}`}
+    >
+      <path d="M2 3.5L5 6.5L8 3.5" />
+    </svg>
+  );
+}
+
 export default function Header() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  /** Libellé du groupe ouvert, ou `null`. Un seul à la fois. */
+  const [openGroup, setOpenGroup] = useState<string | null>(null);
+  const navRef = useRef<HTMLElement>(null);
+
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(`${href}/`);
+
+  // Un changement de page doit refermer les menus : sans ça, le panneau reste
+  // ouvert par-dessus la page qu'on vient d'atteindre.
+  //
+  // L'ajustement se fait pendant le rendu plutôt que dans un effet : React
+  // relance alors le rendu avant de peindre, là où un effet laisserait
+  // apparaître une image intermédiaire, menu encore ouvert. Ça couvre aussi
+  // les boutons précédent/suivant du navigateur, qu'un `onClick` manquerait.
+  const [renderedPath, setRenderedPath] = useState(pathname);
+  if (renderedPath !== pathname) {
+    setRenderedPath(pathname);
+    setMobileOpen(false);
+    setOpenGroup(null);
+  }
+
+  // Échap referme, et un clic en dehors aussi. Les deux sorties auxquelles on
+  // s'attend d'un menu déroulant — sans elles, il faut viser le déclencheur.
+  useEffect(() => {
+    if (!openGroup) return;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpenGroup(null);
+        // Rendre le focus au déclencheur : au clavier, le perdre renverrait
+        // en haut du document.
+        navRef.current
+          ?.querySelector<HTMLButtonElement>(`[data-group="${openGroup}"]`)
+          ?.focus();
+      }
+    };
+    const onPointer = (e: PointerEvent) => {
+      if (!navRef.current?.contains(e.target as Node)) setOpenGroup(null);
+    };
+
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onPointer);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onPointer);
+    };
+  }, [openGroup]);
+
+  const linkClass = (active: boolean) =>
+    `text-sm transition-colors hover:text-volt ${
+      active ? "text-volt font-semibold" : "text-smoke"
+    }`;
 
   return (
     <header className="sticky top-0 z-40 bg-paper/90 backdrop-blur-sm border-b border-haze">
@@ -19,7 +90,7 @@ export default function Header() {
           <Link
             href="/"
             className="flex items-center gap-2.5 shrink-0"
-            onClick={() => setOpen(false)}
+            onClick={() => setMobileOpen(false)}
           >
             <Image
               src="/brand/logo-icon.png"
@@ -32,26 +103,82 @@ export default function Header() {
             <span className="display text-xl tracking-tight">{site.name}</span>
           </Link>
 
-          {/* Le seuil est à `xl`, pas à `lg` : à neuf entrées, la barre ne
-              tient plus sur une ligne en dessous de 1280px — mesuré, deux
-              liens y repassaient à la ligne. En dessous, c'est le menu
-              déroulant qui prend le relais. */}
-          <nav aria-label="Navigation principale" className="hidden xl:block">
+          <nav
+            ref={navRef}
+            aria-label="Navigation principale"
+            className="hidden lg:block"
+          >
             <ul className="flex items-center gap-6">
-              {nav.map((item) => {
-                const active =
-                  pathname === item.href || pathname.startsWith(`${item.href}/`);
+              {nav.map((entry) => {
+                if (!isNavGroup(entry)) {
+                  return (
+                    <li key={entry.href}>
+                      <Link
+                        href={entry.href}
+                        aria-current={isActive(entry.href) ? "page" : undefined}
+                        className={linkClass(isActive(entry.href))}
+                      >
+                        {entry.label}
+                      </Link>
+                    </li>
+                  );
+                }
+
+                const open = openGroup === entry.label;
+                // Le groupe se signale actif dès qu'on est sur l'une de ses
+                // pages : sans ça, la barre n'indique plus où l'on se trouve.
+                const groupActive = entry.items.some((i) => isActive(i.href));
+
                 return (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      aria-current={active ? "page" : undefined}
-                      className={`text-sm transition-colors hover:text-volt ${
-                        active ? "text-volt font-semibold" : "text-smoke"
-                      }`}
+                  // Ouverture au clic seul, pas au survol. Combiner les deux
+                  // demande de savoir lequel a ouvert le menu, sans quoi le
+                  // clic qui suit un survol referme aussitôt ce que le survol
+                  // venait d'ouvrir. Le clic marche partout — souris, tactile,
+                  // clavier — et évite les ouvertures involontaires quand la
+                  // souris ne fait que traverser la barre.
+                  <li key={entry.label} className="relative">
+                    <button
+                      type="button"
+                      data-group={entry.label}
+                      aria-expanded={open}
+                      aria-controls={`menu-${entry.label}`}
+                      onClick={() => setOpenGroup(open ? null : entry.label)}
+                      className={`flex items-center gap-1.5 ${linkClass(groupActive)}`}
                     >
-                      {item.label}
-                    </Link>
+                      {entry.label}
+                      <Chevron open={open} />
+                    </button>
+
+                    {open && (
+                      // L'écart avec le bouton est un `padding` du conteneur
+                      // positionné : il reste ainsi dans la zone du menu, donc
+                      // dans ce que le gestionnaire de clic extérieur
+                      // considère comme « dedans ».
+                      <div className="absolute left-0 top-full pt-3">
+                        <ul
+                          id={`menu-${entry.label}`}
+                          className="min-w-48 rounded-xl border border-haze bg-paper py-2 shadow-lg shadow-black/20"
+                        >
+                          {entry.items.map((item: NavLink) => (
+                            <li key={item.href}>
+                              <Link
+                                href={item.href}
+                                aria-current={
+                                  isActive(item.href) ? "page" : undefined
+                                }
+                                className={`block px-4 py-2 text-sm transition-colors hover:bg-haze/60 hover:text-volt ${
+                                  isActive(item.href)
+                                    ? "text-volt font-semibold"
+                                    : "text-ink"
+                                }`}
+                              >
+                                {item.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </li>
                 );
               })}
@@ -69,13 +196,13 @@ export default function Header() {
             </div>
             <button
               type="button"
-              onClick={() => setOpen((v) => !v)}
-              aria-expanded={open}
+              onClick={() => setMobileOpen((v) => !v)}
+              aria-expanded={mobileOpen}
               aria-controls="menu-mobile"
-              className="xl:hidden p-2 -mr-2"
+              className="lg:hidden p-2 -mr-2"
             >
               <span className="sr-only">
-                {open ? "Fermer le menu" : "Ouvrir le menu"}
+                {mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
               </span>
               <svg
                 width="22"
@@ -87,7 +214,7 @@ export default function Header() {
                 strokeLinecap="round"
                 aria-hidden="true"
               >
-                {open ? (
+                {mobileOpen ? (
                   <>
                     <path d="M5 5l12 12" />
                     <path d="M17 5L5 17" />
@@ -105,28 +232,56 @@ export default function Header() {
         </div>
       </div>
 
-      {open && (
+      {mobileOpen && (
         <nav
           id="menu-mobile"
           aria-label="Navigation mobile"
-          className="xl:hidden border-t border-haze bg-paper"
+          className="lg:hidden border-t border-haze bg-paper"
         >
-          <ul className="mx-auto max-w-6xl px-5 sm:px-8 py-3">
-            {nav.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="block py-2.5 text-base border-b border-haze last:border-0"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-            <li className="pt-4 sm:hidden">
+          {/* Les groupes deviennent des sections à plat, pas des accordéons :
+              sur une page qui ne défile presque pas, replier ne fait
+              qu'ajouter un geste. */}
+          <div className="mx-auto max-w-6xl px-5 sm:px-8 py-4">
+            {nav.map((entry) =>
+              isNavGroup(entry) ? (
+                <section key={entry.label} className="pt-5 first:pt-0">
+                  <h2 className="eyebrow text-smoke">{entry.label}</h2>
+                  <ul className="mt-1">
+                    {entry.items.map((item) => (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          aria-current={isActive(item.href) ? "page" : undefined}
+                          className={`block py-2.5 text-base ${
+                            isActive(item.href) ? "text-volt font-semibold" : ""
+                          }`}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ) : (
+                // Même retrait que les groupes : sans lui, un lien isolé placé
+                // après un groupe se lit comme sa dernière entrée.
+                <div key={entry.href} className="pt-5 first:pt-0">
+                  <Link
+                    href={entry.href}
+                    aria-current={isActive(entry.href) ? "page" : undefined}
+                    className={`block py-2.5 text-base font-semibold ${
+                      isActive(entry.href) ? "text-volt" : ""
+                    }`}
+                  >
+                    {entry.label}
+                  </Link>
+                </div>
+              ),
+            )}
+            <div className="pt-5 sm:hidden">
               <JoinButton className="w-full" />
-            </li>
-          </ul>
+            </div>
+          </div>
         </nav>
       )}
     </header>

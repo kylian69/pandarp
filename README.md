@@ -123,6 +123,32 @@ Les notes sont triées par numéro de version, pas par nom de fichier : `0.10.0`
 passe bien avant `0.9.0`. Chacune obtient une ancre partageable
 (`/patch-notes#v1-0-0`), et la plus récente s'affiche sur l'accueil.
 
+### La navigation
+
+Neuf pages, mais quatre entrées seulement dans la barre : `Le serveur`,
+`Jouer ▾`, `Suivre ▾`, `Galerie`. La structure vit dans `nav`, à la fin de
+`lib/site.ts` — une entrée est soit un lien, soit un groupe avec ses `items`.
+
+Le regroupement répond à un problème concret : la barre servait deux publics à
+la fois. Le visiteur venu de Google veut savoir si le serveur lui plaît (`Le
+serveur`, `Galerie`) ; le joueur déjà installé cherche une référence
+(`Touches`, `Règlement`). Les deux pages qui convertissent restent donc
+directement accessibles, le reste se range sous le verbe qui le résume.
+
+Aucune page n'a été fusionnée : chacune garde son URL et son référencement.
+Le pied de page les liste toutes à plat via `allNavLinks`, dérivé du même
+tableau — ajouter une page à `nav` suffit, le pied suit.
+
+**Les menus s'ouvrent au clic, pas au survol.** Combiner les deux impose de
+retenir lequel a ouvert le menu : sinon le clic qui suit un survol referme
+aussitôt ce que le survol venait d'ouvrir. Le clic marche sur tous les
+supports et évite les ouvertures involontaires quand la souris traverse la
+barre. Échap et un clic à l'extérieur referment ; Échap rend le focus au
+déclencheur.
+
+Sur mobile, les groupes deviennent des sections à plat plutôt que des
+accordéons : sur un panneau qui défile à peine, replier n'ajoute qu'un geste.
+
 ### Faire vivre la roadmap
 
 Tout tient dans `content/roadmap.ts`. Un chantier avance en changeant son

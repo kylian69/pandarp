@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { nav, site } from "@/lib/site";
+import { allNavLinks, site } from "@/lib/site";
 
 export default function Footer() {
   return (
@@ -27,7 +27,7 @@ export default function Footer() {
           <div>
             <h2 className="eyebrow text-smoke">Le serveur</h2>
             <ul className="mt-4 space-y-2.5">
-              {nav.map((item) => (
+              {allNavLinks.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}

@@ -38,26 +38,56 @@ export const isProductionSite = site.url === "https://pandarp.fr";
  */
 export const joinUrl = site.cfxId ? `https://cfx.re/join/${site.cfxId}` : "";
 
+export type NavLink = { href: string; label: string };
+export type NavGroup = { label: string; items: NavLink[] };
+export type NavEntry = NavLink | NavGroup;
+
+/** Distingue un groupe d'un lien simple, sans avoir à tester `href`. */
+export function isNavGroup(entry: NavEntry): entry is NavGroup {
+  return "items" in entry;
+}
+
 /**
  * Navigation principale.
  *
- * ⚠️ Neuf entrées, c'est déjà ce que la barre peut tenir : mesurée, elle
- * occupe 737 px et ne s'affiche plus qu'à partir de 1280 px (`xl` dans
- * `Header.tsx`), le menu déroulant prenant le relais en dessous. Une dixième
- * entrée obligerait à repenser la barre — sous-menu ou libellés raccourcis —
- * plutôt qu'à repousser encore le seuil.
+ * Deux groupes plutôt que neuf entrées à plat : le visiteur venu de Google
+ * n'a pas les mêmes besoins que le joueur déjà installé, et la barre servait
+ * les deux en même temps. « Le serveur » et « Galerie » — les deux pages qui
+ * convainquent — restent donc directement accessibles, tandis que les pages
+ * utilitaires se rangent sous le verbe qui les résume.
+ *
+ * Aucune page n'a été retirée ni fusionnée : chacune garde son URL et son
+ * référencement propre. Seul l'accès change.
  */
-export const nav = [
+export const nav: NavEntry[] = [
   { href: "/fonctionnalites", label: "Le serveur" },
-  { href: "/rejoindre", label: "Rejoindre" },
-  { href: "/reglement", label: "Règlement" },
-  { href: "/touches", label: "Touches" },
+  {
+    label: "Jouer",
+    items: [
+      { href: "/rejoindre", label: "Rejoindre" },
+      { href: "/reglement", label: "Règlement" },
+      { href: "/touches", label: "Touches" },
+      { href: "/faq", label: "FAQ" },
+    ],
+  },
+  {
+    label: "Suivre",
+    items: [
+      { href: "/blog", label: "Actualités" },
+      { href: "/patch-notes", label: "Patch notes" },
+      { href: "/roadmap", label: "Roadmap" },
+    ],
+  },
   { href: "/galerie", label: "Galerie" },
-  { href: "/patch-notes", label: "Patch notes" },
-  { href: "/roadmap", label: "Roadmap" },
-  { href: "/blog", label: "Actualités" },
-  { href: "/faq", label: "FAQ" },
-] as const;
+];
+
+/**
+ * Toutes les pages à plat. Le pied de page les liste sans regroupement :
+ * son rôle est d'être exhaustif, pas d'orienter.
+ */
+export const allNavLinks: NavLink[] = nav.flatMap((entry) =>
+  isNavGroup(entry) ? entry.items : [entry],
+);
 
 /** Construit une URL absolue, requise pour les balises canoniques et Open Graph. */
 export function absoluteUrl(path = "/") {
