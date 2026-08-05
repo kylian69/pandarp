@@ -5,11 +5,12 @@ import { getDiscordStatus, getServerStatus } from "@/lib/live";
 import { getAllPosts, formatDate } from "@/lib/blog";
 import { getPatchNotes } from "@/lib/patch-notes";
 import { roadmap } from "@/content/roadmap";
-import { getHeroImage } from "@/lib/hero";
+import { getHeroMedia } from "@/lib/hero";
 import { features } from "@/content/features";
 import { site } from "@/lib/site";
 import LivePanel from "@/components/LivePanel";
 import JoinButton from "@/components/JoinButton";
+import HeroBackground from "@/components/HeroBackground";
 import { Container, Eyebrow, JsonLd } from "@/components/ui";
 
 export const metadata: Metadata = {
@@ -47,7 +48,8 @@ export default async function HomePage() {
   const posts = getAllPosts().slice(0, 3);
   const [latestPatch] = await getPatchNotes();
   const inProgress = roadmap.filter((item) => item.status === "en-cours");
-  const heroImage = getHeroImage();
+  const heroMedia = getHeroMedia();
+  const hasHeroBackground = Boolean(heroMedia.image ?? heroMedia.night);
 
   return (
     <>
@@ -70,21 +72,17 @@ export default async function HomePage() {
       {/* Hero — la thèse du serveur, énoncée sans détour.
           Avec une capture en fond, le bloc devient une bande sombre dans les
           deux thèmes : `on-dark` y rétablit la palette du mode sombre, ce qui
-          garde le texte lisible sans toucher aux classes de couleur. */}
+          garde le texte lisible sans toucher aux classes de couleur.
+          Le fond reste sombre même avec la vidéo de jour : c'est le même
+          traitement — filtre puis voiles — qui garantit le contraste, et le
+          thème change ce qu'on regarde, pas la lisibilité de ce qu'on lit. */}
       <section
-        className={`border-b border-haze ${heroImage ? "relative isolate on-dark" : ""}`}
+        className={`border-b border-haze ${hasHeroBackground ? "relative isolate on-dark" : ""}`}
       >
-        {heroImage && (
+        {hasHeroBackground && (
           <>
-            <Image
-              src={heroImage}
-              alt=""
-              fill
-              // Plus gros téléchargement de la page et élément le plus grand
-              // au premier écran : il conditionne le LCP, donc pas de chargement
-              // différé.
-              priority
-              sizes="100vw"
+            <HeroBackground
+              media={heroMedia}
               // Le filtre fait l'essentiel du travail, les voiles ne font que
               // le moduler. Un voile s'ajoute uniformément alors que la gêne
               // est ponctuelle — les lampadaires, les enseignes ; la

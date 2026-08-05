@@ -205,6 +205,35 @@ Le réglage a été calibré à la mesure, pas à l'œil : contraste du pire pix
 sous chaque ligne de texte, sur huit largeurs de 320 à 1920 px. Si vous
 changez ces valeurs, revérifiez — le seuil se franchit sans que ça se voie.
 
+### Animer le fond de l'accueil
+
+Déposez `public/hero-jour.webm` et `public/hero-nuit.webm` : la première joue
+en thème clair, la seconde en thème sombre. Un `hero.webm` sans suffixe sert
+de vidéo unique pour les deux thèmes, et `.mp4` est accepté en repli.
+
+L'image reste rendue en dessous en toutes circonstances. C'est elle qui est
+peinte en premier — donc elle qui compte pour le LCP — et c'est elle qu'on
+voit si la vidéo n'arrive pas : réseau coupé, format refusé, lecture
+automatique bloquée. La vidéo est un embellissement posé par-dessus, jamais
+une dépendance. Elle sert aussi d'affiche (`poster`) pendant le chargement,
+ce qui évite le noir entre la peinture et la première image.
+
+`HeroBackground` ne télécharge que la vidéo du thème courant, et ne la monte
+qu'après le premier rendu — sinon elle disputerait la bande passante à
+l'image pendant l'affichage initial. Deux cas la suppriment complètement :
+`prefers-reduced-motion: reduce`, car un décor en boucle est exactement ce que
+ce réglage demande de ne pas imposer, et `navigator.connection.saveData`, où
+quelques mégaoctets de décor n'ont rien d'anodin.
+
+Le thème vit dans un attribut de `<html>`, sans état React à écouter : un
+`MutationObserver` sur `data-theme` est le seul moyen d'être prévenu de la
+bascule. Le changement de source remonte l'élément via une `key`, ce qui
+relance la lecture sans piloter le chargement à la main.
+
+Le hero reste sombre même avec la vidéo de jour : c'est le même traitement —
+filtre de luminosité puis voiles — qui garantit le contraste. Le thème change
+ce qu'on regarde, pas la lisibilité de ce qu'on lit.
+
 ### Ajouter des captures à la galerie
 
 Déposez vos images dans `public/medias/`. Elles sont publiées telles quelles,

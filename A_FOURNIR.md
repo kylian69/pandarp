@@ -188,6 +188,8 @@ facultatif : laissez-le vide si vous ne savez pas.
       — *une image provisoire est en place, à remplacer*
 - [ ] **6 à 12 captures d'écran** prises en jeu, en 1920 × 1080 minimum,
       en `.jpg` ou `.webp`
+- [ ] *facultatif* — **2 vidéos de fond** (jour et nuit) pour animer la page
+      d'accueil, moins de 3 Mo chacune
 
 ### La capture de fond (hero)
 
@@ -222,6 +224,51 @@ licence libre remplit le même rôle sans cette contradiction.
 
 Remplacez-la dès que vous avez une vraie capture du serveur : c'est votre jeu
 qu'il faut montrer, pas une photo générique.
+
+### Le fond animé (facultatif)
+
+Le fond de l'accueil peut être une vidéo au lieu d'une image fixe, et cette
+vidéo peut changer avec le thème : Los Santos de jour en thème clair, de nuit
+en thème sombre.
+
+**Où les déposer :**
+
+| Fichier                 | Quand elle joue                     |
+| ----------------------- | ----------------------------------- |
+| `public/hero-jour.webm` | thème clair                         |
+| `public/hero-nuit.webm` | thème sombre                        |
+| `public/hero.webm`      | vidéo unique, si vous n'en avez qu'une |
+
+Le `.mp4` est accepté aussi, mais le `.webm` est nettement plus léger à
+qualité égale. Rien n'est obligatoire : sans fichier, l'image fixe reste, et
+avec une seule des deux vidéos, elle joue dans les deux thèmes.
+
+**Ce qui marche :** 10 à 20 secondes, en boucle propre (la fin doit pouvoir
+enchaîner sur le début sans saut visible), avec un mouvement **lent** — un
+travelling, un plan fixe où seul le trafic bouge, un lever de soleil accéléré.
+Une vidéo agitée derrière un titre fatigue et se remarque plus que le texte.
+Comme pour l'image : rien d'important dans la moitié gauche.
+
+**Le poids, c'est le point critique.** Visez **moins de 3 Mo par vidéo**,
+idéalement 1 à 2 Mo. Au-delà, la page d'accueil devient lourde et ça se paie
+en référencement — Google mesure la vitesse de chargement. Pour y arriver :
+640 × 360 ou 960 × 540 suffit (elle est floutée par l'assombrissement de toute
+façon), 24 images/seconde, et **pas de piste audio** — elle est jouée en
+sourdine, la conserver serait du poids pour rien.
+
+Commande de conversion, si vous avez `ffmpeg` :
+
+```
+ffmpeg -i votre-video.mp4 -an -vf scale=960:-2 -c:v libvpx-vp9 -b:v 800k -crf 36 hero-nuit.webm
+```
+
+Augmentez `-b:v` si le rendu vous paraît trop dégradé, baissez-le si le
+fichier dépasse 3 Mo.
+
+**Gardez l'image en place.** Elle sert d'affiche pendant le chargement de la
+vidéo, et de fond de repli quand la vidéo ne peut pas jouer : connexion
+coupée, ou visiteur ayant demandé à son système de réduire les animations. La
+vidéo est un plus, jamais un remplacement.
 
 ### Les captures de la galerie
 
