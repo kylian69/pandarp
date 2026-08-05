@@ -38,6 +38,15 @@ export const isProductionSite = site.url === "https://pandarp.fr";
  */
 export const joinUrl = site.cfxId ? `https://cfx.re/join/${site.cfxId}` : "";
 
+/**
+ * Navigation principale.
+ *
+ * ⚠️ Neuf entrées, c'est déjà ce que la barre peut tenir : mesurée, elle
+ * occupe 737 px et ne s'affiche plus qu'à partir de 1280 px (`xl` dans
+ * `Header.tsx`), le menu déroulant prenant le relais en dessous. Une dixième
+ * entrée obligerait à repenser la barre — sous-menu ou libellés raccourcis —
+ * plutôt qu'à repousser encore le seuil.
+ */
 export const nav = [
   { href: "/fonctionnalites", label: "Le serveur" },
   { href: "/rejoindre", label: "Rejoindre" },
@@ -45,6 +54,7 @@ export const nav = [
   { href: "/touches", label: "Touches" },
   { href: "/galerie", label: "Galerie" },
   { href: "/patch-notes", label: "Patch notes" },
+  { href: "/roadmap", label: "Roadmap" },
   { href: "/blog", label: "Actualités" },
   { href: "/faq", label: "FAQ" },
 ] as const;

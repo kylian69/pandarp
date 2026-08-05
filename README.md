@@ -72,6 +72,7 @@ components/         en-tête, pied de page, panneau live, primitives
 content/            tout le texte éditorial — c'est ici qu'on écrit
   blog/*.md         articles, en Markdown avec frontmatter
   patch-notes/*.md  notes de version, une par mise à jour
+  roadmap.ts        chantiers en cours, prévus et à l'étude
 lib/                configuration du site, appels live, lecture du blog
 public/medias/      captures d'écran de la galerie
 ```
@@ -121,6 +122,26 @@ Une phrase d'introduction, puis les sections `### Ajouts`, `### Correctifs`…
 Les notes sont triées par numéro de version, pas par nom de fichier : `0.10.0`
 passe bien avant `0.9.0`. Chacune obtient une ancre partageable
 (`/patch-notes#v1-0-0`), et la plus récente s'affiche sur l'accueil.
+
+### Faire vivre la roadmap
+
+Tout tient dans `content/roadmap.ts`. Un chantier avance en changeant son
+`status` (`en-cours` → `prevu` → `etude`, ou l'inverse) ; la page le range
+dans la bonne section sans autre intervention. Une fois livré, il passe du
+tableau `roadmap` au tableau `shipped`, avec le numéro de version qui l'a
+apporté.
+
+Ce lien de version n'est rendu cliquable que si la note existe réellement dans
+`content/patch-notes/` — une note supprimée dégrade en texte simple plutôt que
+de laisser une ancre morte.
+
+La gradation visuelle (marqueur plein, anneau, anneau pâle ; rail qui pâlit de
+groupe en groupe) encode la certitude décroissante. Ce n'est pas décoratif :
+c'est ce qui empêche une piste « à l'étude » de se lire comme un engagement.
+
+L'ordre d'affichage vient de `ROADMAP_STATUSES`, pas de l'ordre des entrées
+dans le tableau — celles-ci peuvent donc être écrites dans n'importe quel
+ordre.
 
 ### Mettre une capture en fond de l'accueil
 

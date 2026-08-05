@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { getDiscordStatus, getServerStatus } from "@/lib/live";
 import { getAllPosts, formatDate } from "@/lib/blog";
 import { getPatchNotes } from "@/lib/patch-notes";
+import { roadmap } from "@/content/roadmap";
 import { getHeroImage } from "@/lib/hero";
 import { features } from "@/content/features";
 import { site } from "@/lib/site";
@@ -45,6 +46,7 @@ export default async function HomePage() {
   ]);
   const posts = getAllPosts().slice(0, 3);
   const [latestPatch] = await getPatchNotes();
+  const inProgress = roadmap.filter((item) => item.status === "en-cours");
   const heroImage = getHeroImage();
 
   return (
@@ -301,6 +303,27 @@ export default async function HomePage() {
               </span>
               <span className="text-sm text-smoke transition-colors group-hover:text-volt">
                 Tous les patch notes →
+              </span>
+            </Link>
+          </Container>
+        </section>
+      )}
+
+      {/* Son pendant tourné vers l'avant : la dernière version dit que le
+          serveur vit, les chantiers en cours disent qu'il continue. */}
+      {inProgress.length > 0 && (
+        <section className="pb-16 sm:pb-24">
+          <Container>
+            <Link
+              href="/roadmap"
+              className="group flex flex-wrap items-baseline gap-x-4 gap-y-2 border-t border-ink pt-5"
+            >
+              <span className="eyebrow text-volt">En chantier</span>
+              <span className="w-full leading-snug text-smoke transition-colors group-hover:text-ink sm:w-auto sm:flex-1">
+                {inProgress.map((item) => item.title).join(" · ")}
+              </span>
+              <span className="text-sm text-smoke transition-colors group-hover:text-volt">
+                La roadmap →
               </span>
             </Link>
           </Container>

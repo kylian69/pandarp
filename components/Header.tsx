@@ -32,7 +32,11 @@ export default function Header() {
             <span className="display text-xl tracking-tight">{site.name}</span>
           </Link>
 
-          <nav aria-label="Navigation principale" className="hidden lg:block">
+          {/* Le seuil est à `xl`, pas à `lg` : à neuf entrées, la barre ne
+              tient plus sur une ligne en dessous de 1280px — mesuré, deux
+              liens y repassaient à la ligne. En dessous, c'est le menu
+              déroulant qui prend le relais. */}
+          <nav aria-label="Navigation principale" className="hidden xl:block">
             <ul className="flex items-center gap-6">
               {nav.map((item) => {
                 const active =
@@ -68,7 +72,7 @@ export default function Header() {
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
               aria-controls="menu-mobile"
-              className="lg:hidden p-2 -mr-2"
+              className="xl:hidden p-2 -mr-2"
             >
               <span className="sr-only">
                 {open ? "Fermer le menu" : "Ouvrir le menu"}
@@ -105,7 +109,7 @@ export default function Header() {
         <nav
           id="menu-mobile"
           aria-label="Navigation mobile"
-          className="lg:hidden border-t border-haze bg-paper"
+          className="xl:hidden border-t border-haze bg-paper"
         >
           <ul className="mx-auto max-w-6xl px-5 sm:px-8 py-3">
             {nav.map((item) => (

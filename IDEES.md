@@ -34,9 +34,8 @@ le plus vite ; attractivité ensuite ; technique en dernier.
       serveur a des pics identifiables.
 - [ ] **Calendrier d'événements** (braquages, courses, events RP) — donne une
       raison de revenir sur le site en dehors du blog.
-- [ ] **Timeline « roadmap »** publique (à venir / en cours / fait) —
-      complète bien les patch notes déjà en place, rassure sur le sérieux du
-      projet.
+- [x] ~~**Timeline « roadmap »** publique~~ — fait, page `/roadmap`. Le
+      contenu est encore inventé, à remplacer (voir `A_FOURNIR.md` §4).
 - [ ] **Showcase de captures communautaires** (personnages, scènes) — contenu
       généré par les joueurs, gratuit et authentique, renforce le sentiment de
       communauté vivante. Demande une modération légère.

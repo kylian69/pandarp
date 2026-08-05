@@ -134,7 +134,55 @@ que le format des annonces sera stabilisé.
 
 ---
 
-## 4. Les captures du serveur
+## 4. La roadmap — à remplacer ⚠️
+
+La page `/roadmap` affiche vos chantiers en cours, prévus et à l'étude. Comme
+pour les patch notes, **le contenu actuel est inventé** — il donne à voir le
+rendu, rien de plus.
+
+- [ ] **Réécrire** `content/roadmap.ts` avec vos vrais chantiers
+
+**Comment ça se modifie :** tout est dans `content/roadmap.ts`, un seul
+fichier. Chaque chantier ressemble à ceci :
+
+```ts
+{
+  slug: "immobilier",
+  title: "Immobilier jouable",
+  summary: "Achat, location et revente de logements entre joueurs.",
+  status: "en-cours",   // "en-cours" | "prevu" | "etude"
+  target: "Fin 2026",   // facultatif
+},
+```
+
+Faire avancer un chantier, c'est changer son `status` : la page le déplace
+toute seule dans la bonne section. Quand il est livré, retirez-le de `roadmap`
+et ajoutez-le à `shipped` avec le numéro de version — il rejoint alors la
+liste « Ce qui tourne déjà », avec un lien vers la note de version
+correspondante.
+
+**Trois niveaux, et ils comptent :**
+
+| Statut | Ce que ça dit au joueur |
+| --- | --- |
+| `en-cours` | En développement actif, ça arrivera |
+| `prevu` | Validé et planifié, pas encore commencé |
+| `etude` | Une piste. Ni datée, ni garantie |
+
+La page rend cette gradation visible (marqueurs pleins en haut, anneaux pâles
+en bas) pour qu'aucune ligne « à l'étude » ne se lise comme une promesse.
+C'est délibéré : une roadmap publique n'a d'intérêt que si elle est tenue, et
+elle se tient d'autant mieux qu'elle promet peu.
+
+**Sur les dates :** le champ `target` est volontairement en texte libre et
+large (« Rentrée 2026 », « Fin 2026 »). Évitez les dates précises sur un
+chantier non commencé — c'est la promesse qu'on finit par ne pas tenir, et
+une roadmap ratée fait plus de mal que pas de roadmap du tout. Le champ est
+facultatif : laissez-le vide si vous ne savez pas.
+
+---
+
+## 5. Les captures du serveur
 
 - [ ] **1 capture pour le fond de la page d'accueil**, en 1920 × 1080 minimum
       — *une image provisoire est en place, à remplacer*
@@ -194,7 +242,7 @@ arrivent, avec un renvoi vers le Discord.
 
 ---
 
-## 5. Le domaine
+## 6. Le domaine
 
 - [ ] **Acheter `pandarp.fr`**
 
@@ -210,7 +258,7 @@ récompense l'ancienneté, et rien ne remplace le temps.
 
 ---
 
-## 6. Une image de partage
+## 7. Une image de partage
 
 - [ ] **Visuel 1200 × 630** — ce qui s'affiche quand un lien du site est
       collé sur Discord, Twitter ou WhatsApp
@@ -226,7 +274,7 @@ texte, sans vignette — ça marche, mais c'est nettement moins cliqué.
 
 ---
 
-## 7. Optionnel, quand vous les aurez
+## 8. Optionnel, quand vous les aurez
 
 - [ ] Chaîne YouTube ou Twitch officielle du serveur (à lier dans le pied de page)
 - [ ] Compte Twitter / X, TikTok
