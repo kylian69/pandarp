@@ -97,6 +97,15 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* Tailwind v4 aligne le curseur des boutons sur celui du navigateur
+     (`default`), là où la v3 mettait `pointer`. Ici les boutons sont tous des
+     commandes cliquables — menus de navigation, bascule de thème, connexion —
+     et rien ne les distingue d'un lien à l'œil. On rétablit donc le curseur
+     qui annonce qu'on peut cliquer, sauf sur un bouton désactivé. */
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+
   ::selection {
     background-color: var(--color-volt-fill);
     color: #fafaf7;
