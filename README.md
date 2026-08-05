@@ -146,8 +146,17 @@ supports et évite les ouvertures involontaires quand la souris traverse la
 barre. Échap et un clic à l'extérieur referment ; Échap rend le focus au
 déclencheur.
 
-Sur mobile, les groupes deviennent des sections à plat plutôt que des
-accordéons : sur un panneau qui défile à peine, replier n'ajoute qu'un geste.
+**Sur mobile**, chaque entrée de la barre devient un bloc encadré — y compris
+les deux liens isolés, qui portent une flèche pour dire qu'ils mènent quelque
+part là où l'en-tête d'un groupe ne mène nulle part. C'est ce contour qui rend
+les quatre unités visibles : en simple liste, les neuf liens se noyaient au
+même poids et la structure disparaissait.
+
+Rien n'est replié en accordéon : tout reste à une seule touche. Les
+espacements sont réglés pour que le panneau tienne d'une pièce sur un écran de
+667 px (iPhone SE), bouton de connexion compris — 665 px mesurés. Si vous
+ajoutez une entrée, revérifiez cette hauteur, et gardez 48 px par ligne (le
+minimum tactile recommandé est 44).
 
 ### Faire vivre la roadmap
 

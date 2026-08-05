@@ -27,6 +27,25 @@ function Chevron({ open }: { open: boolean }) {
   );
 }
 
+function ArrowRight() {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className="shrink-0"
+    >
+      <path d="M2 7h10M8 3l4 4-4 4" />
+    </svg>
+  );
+}
+
 export default function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -238,22 +257,32 @@ export default function Header() {
           aria-label="Navigation mobile"
           className="lg:hidden border-t border-haze bg-paper"
         >
-          {/* Les groupes deviennent des sections à plat, pas des accordéons :
-              sur une page qui ne défile presque pas, replier ne fait
-              qu'ajouter un geste. */}
-          <div className="mx-auto max-w-6xl px-5 sm:px-8 py-4">
+          {/* Chaque entrée de la barre devient un bloc encadré, y compris les
+              liens isolés : c'est ce contour qui rend visibles les quatre
+              unités, là où une simple liste de textes les noyait toutes au
+              même poids. Rien n'est replié — tout reste à une seule touche. */}
+          {/* Espacements resserrés au minimum utile : le panneau doit tenir
+              d'une pièce sur un écran de 667 px (iPhone SE), bouton de
+              connexion compris. Les hauteurs de touche, elles, ne bougent
+              pas — 48 px par entrée, au-dessus du minimum de 44. */}
+          <div className="mx-auto max-w-6xl space-y-2.5 px-5 py-4 sm:px-8">
             {nav.map((entry) =>
               isNavGroup(entry) ? (
-                <section key={entry.label} className="pt-5 first:pt-0">
-                  <h2 className="eyebrow text-smoke">{entry.label}</h2>
-                  <ul className="mt-1">
+                <section
+                  key={entry.label}
+                  className="overflow-hidden rounded-xl border border-haze"
+                >
+                  <h2 className="eyebrow px-4 pt-3 pb-2.5 text-smoke">
+                    {entry.label}
+                  </h2>
+                  <ul>
                     {entry.items.map((item) => (
                       <li key={item.href}>
                         <Link
                           href={item.href}
                           aria-current={isActive(item.href) ? "page" : undefined}
-                          className={`block py-2.5 text-base ${
-                            isActive(item.href) ? "text-volt font-semibold" : ""
+                          className={`block border-t border-haze px-4 py-3 text-base ${
+                            isActive(item.href) ? "bg-haze/50 text-volt font-semibold" : ""
                           }`}
                         >
                           {item.label}
@@ -263,22 +292,22 @@ export default function Header() {
                   </ul>
                 </section>
               ) : (
-                // Même retrait que les groupes : sans lui, un lien isolé placé
-                // après un groupe se lit comme sa dernière entrée.
-                <div key={entry.href} className="pt-5 first:pt-0">
-                  <Link
-                    href={entry.href}
-                    aria-current={isActive(entry.href) ? "page" : undefined}
-                    className={`block py-2.5 text-base font-semibold ${
-                      isActive(entry.href) ? "text-volt" : ""
-                    }`}
-                  >
-                    {entry.label}
-                  </Link>
-                </div>
+                // La flèche distingue le lien isolé du bloc de groupe : celui-ci
+                // mène quelque part, l'en-tête d'un groupe non.
+                <Link
+                  key={entry.href}
+                  href={entry.href}
+                  aria-current={isActive(entry.href) ? "page" : undefined}
+                  className={`flex items-center justify-between gap-3 rounded-xl border border-haze px-4 py-3.5 text-base font-semibold ${
+                    isActive(entry.href) ? "bg-haze/50 text-volt" : ""
+                  }`}
+                >
+                  {entry.label}
+                  <ArrowRight />
+                </Link>
               ),
             )}
-            <div className="pt-5 sm:hidden">
+            <div className="pt-2 sm:hidden">
               <JoinButton className="w-full" />
             </div>
           </div>
