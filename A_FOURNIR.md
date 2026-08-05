@@ -190,6 +190,7 @@ facultatif : laissez-le vide si vous ne savez pas.
       en `.jpg` ou `.webp`
 - [ ] *facultatif* — **2 vidéos de fond** (jour et nuit) pour animer la page
       d'accueil, moins de 3 Mo chacune
+      — *deux vidéos provisoires sont en place, à remplacer ou à retirer*
 
 ### La capture de fond (hero)
 
@@ -269,6 +270,14 @@ fichier dépasse 3 Mo.
 vidéo, et de fond de repli quand la vidéo ne peut pas jouer : connexion
 coupée, ou visiteur ayant demandé à son système de réduire les animations. La
 vidéo est un plus, jamais un remplacement.
+
+**⚠️ Vidéos provisoires en place**, pour que vous puissiez voir le rendu tout
+de suite : `hero-jour.mp4` (trafic urbain de jour, vue aérienne) et
+`hero-nuit.mp4` (rue en ville la nuit). Deux séquences génériques trouvées sur
+Mixkit, licence gratuite y compris en usage commercial, sans attribution
+requise — mais elles ne montrent ni Los Santos ni votre serveur. Remplacez-les
+dès que vous avez vos propres rushs, ou supprimez les deux fichiers pour
+revenir à l'image fixe seule.
 
 ### Les captures de la galerie
 
