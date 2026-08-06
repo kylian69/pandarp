@@ -35,8 +35,8 @@ export const revalidate = 300;
  * le relais.
  */
 const SCRIMS = [
-  "bg-black/50 lg:bg-black/12",
-  "bg-gradient-to-b from-black/35 via-transparent to-transparent",
+  "bg-black/55 lg:bg-black/15",
+  "bg-gradient-to-b from-black/55 via-black/25 to-transparent",
   "hidden lg:block bg-gradient-to-r from-black/85 via-black/55 to-transparent",
 ];
 
@@ -88,7 +88,7 @@ export default async function HomePage() {
               // est ponctuelle — les lampadaires, les enseignes ; la
               // luminosité, elle, écrase ces pics proportionnellement, donc
               // sans ternir les zones déjà sombres.
-              className="-z-10 object-cover brightness-[0.7]"
+              className="-z-10 object-cover brightness-[0.75]"
             />
             {/* Voir SCRIMS : plancher uniforme, protection du haut pour le
                 surtitre, et assombrissement de la colonne de texte sur grand
@@ -109,9 +109,8 @@ export default async function HomePage() {
           <div className="mt-12 grid gap-10 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-7">
               <p className="text-xl leading-relaxed text-ink/80 max-w-xl">
-                Pas de candidature à écrire, pas d&apos;entretien à passer. Vous
-                installez FiveM, vous vous connectez, vous créez votre personnage.
-                La première session commence dans la minute.
+                Pas de candidature, pas d&apos;entretien. Installez FiveM sur
+                GTA V Enhanced, connectez-vous, créez votre personnage.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <JoinButton />
@@ -122,16 +121,6 @@ export default async function HomePage() {
                   Découvrir le serveur
                 </Link>
               </div>
-              <p className="mt-5 text-sm text-smoke">
-                Nécessite GTA V Enhanced sur PC et le client FiveM.{" "}
-                <Link
-                  href="/rejoindre"
-                  className="text-volt-deep underline underline-offset-2"
-                >
-                  Voir la procédure
-                </Link>
-                .
-              </p>
             </div>
 
             {/* Télémétrie : traitée comme un instrument, pas comme une vitrine. */}
